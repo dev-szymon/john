@@ -1,5 +1,4 @@
 ---
-title: "Leather bifold wallet"
 prod_id: prod_HqskuLbsMvvwsg
 ---
 
