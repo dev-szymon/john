@@ -1,0 +1,30 @@
+backend:
+  name: git-gateway
+  branch: master
+  commit_messages:
+    create: "Create {{collection}} “{{slug}}”"
+    update: "Update {{collection}} “{{slug}}”"
+    delete: "Delete {{collection}} “{{slug}}”"
+    uploadMedia: "[skip ci] Upload “{{path}}”"
+    deleteMedia: "[skip ci] Delete “{{path}}”"
+
+media_folder: static/img
+public_folder: /img
+publish_mode: editorial_workflow
+
+collections:
+  - name: "products"
+    label: "Produkty"
+    folder: "src/pages/products"
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}"
+    fields:
+      - {
+          label: "Template Key",
+          name: "template",
+          widget: "hidden",
+          default: "product",
+        }
+      - { label: "Tytuł", name: "title", widget: "string" }
+      - { label: "ID produktu", name: "prod_id", widget: "string" }
+      - { label: "Treść", name: "body", widget: "markdown" }
