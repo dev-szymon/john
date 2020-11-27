@@ -101,7 +101,6 @@ const ShoppingCart = ({ setCartOpen }) => {
           </div>
         </form>
         <button onClick={() => handleCheckout()}>checkout</button>
-        <button onClick={() => console.log(formData)}>bum</button>
       </div>
     )
   }

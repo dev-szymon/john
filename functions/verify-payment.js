@@ -1,5 +1,5 @@
 require("dotenv").config()
-const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY)
+const stripe = require("stripe")(process.env.GATSBY_STRIPE_SK)
 const nodemailer = require("nodemailer")
 
 exports.handler = async ({ body, headers }) => {

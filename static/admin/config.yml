@@ -9,12 +9,18 @@ backend:
     deleteMedia: "[skip ci] Delete “{{path}}”"
 
 media_folder: static/img
+media_library:
+  name: cloudinary
+  config:
+    cloud_name: dq104qc4m
+    api_key: 717158453188245
+    multiple: true
 public_folder: /img
 publish_mode: editorial_workflow
 
 collections:
   - name: "products"
-    label: "Produkty"
+    label: "Products"
     folder: "src/pages/products"
     create: true
     slug: "{{prod_id}}"
@@ -25,5 +31,25 @@ collections:
           widget: "hidden",
           default: "product",
         }
-      - { label: "ID produktu", name: "prod_id", widget: "string" }
-      - { label: "Treść", name: "body", widget: "markdown" }
+      - { label: "Product ID", name: "prod_id", widget: "string" }
+      - {
+          label: "Leather color",
+          name: "leather_color",
+          widget: "color",
+          allowInput: "true",
+          required: false,
+        }
+      - {
+          label: "Thread color",
+          name: "thread_color",
+          widget: "color",
+          allowInput: "true",
+          required: false,
+        }
+      - { label: "Body", name: "body", widget: "markdown" }
+      - {
+          label: "Images",
+          name: "featuredimage",
+          widget: "image",
+          media_library: { name: "cloudinary", allow_multiple: true },
+        }

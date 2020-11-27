@@ -39,7 +39,7 @@ module.exports = {
       resolve: `gatsby-source-stripe`,
       options: {
         objects: ["Product", "Price"],
-        secretKey: process.env.STRIPE_SECRET_KEY,
+        secretKey: process.env.GATSBY_STRIPE_SK,
         downloadFiles: true,
       },
     },
