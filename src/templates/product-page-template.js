@@ -14,7 +14,7 @@ export const ProductPageTemplate = ({ id, preview }) => {
         .then(res => res.json())
         .then(data => console.log(data))
     }
-  })
+  }, [preview])
   return (
     <section>
       <h1>{id}</h1>

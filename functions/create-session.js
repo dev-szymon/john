@@ -5,6 +5,7 @@ exports.handler = async ({ body }) => {
   try {
     const { cartItems, formData } = JSON.parse(body)
     const { name, address, postal_code, tax_id } = formData
+
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ["p24", "card"],
       line_items: cartItems,

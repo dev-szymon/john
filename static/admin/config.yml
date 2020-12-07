@@ -31,7 +31,18 @@ collections:
           widget: "hidden",
           default: "product",
         }
-      - { label: "Product ID", name: "prod_id", widget: "string" }
+      - {
+          label: "Title",
+          name: "title",
+          widget: "hidden",
+          default: "{{prod_id}}",
+        }
+      - {
+          label: "Product ID",
+          name: "prod_id",
+          widget: "products",
+          separator: __,
+        }
       - {
           label: "Leather color",
           name: "leather_color",

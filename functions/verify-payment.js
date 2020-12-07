@@ -1,6 +1,7 @@
 require("dotenv").config()
 const stripe = require("stripe")(process.env.GATSBY_STRIPE_SK)
 const nodemailer = require("nodemailer")
+const { email_template } = require("../html-templates/purchase-confirmation.js")
 
 exports.handler = async ({ body, headers }) => {
   const endpointSecret = process.env.STRIPE_WEBHOOK_SECRET
@@ -26,6 +27,10 @@ exports.handler = async ({ body, headers }) => {
 
       const userEmail = paymentIntent.charges.data[0].billing_details.email
 
+      const items = await stripe.checkout.sessions.listLineItems(session.id)
+
+      console.log(items)
+
       // async..await is not allowed in global scope, must use a wrapper
       async function main(mail) {
         // create reusable transporter object using the default SMTP transport
@@ -38,7 +43,7 @@ exports.handler = async ({ body, headers }) => {
         })
 
         // send mail with defined transport object
-        let info = await transporter.sendMail({
+        let client = await transporter.sendMail({
           from: `"Dev-Szymon 👻" <${process.env.GMAIL_USER}>`, // sender address
           to: mail, // list of receivers
           subject: "Hello ✔", // Subject line
@@ -46,7 +51,19 @@ exports.handler = async ({ body, headers }) => {
           html: `<b>Hello world?</b><a href="http://localhost:8000/files/${chargeId}">"http://localhost:8000/files/${chargeId}"</a>`, // html body
         })
 
-        console.log("Message sent: %s", info.messageId)
+        let shop = await transporter.sendMail({
+          from: `"Dev-Szymon 👻" <${process.env.GMAIL_USER}>`, // sender address
+          to: process.env.GMAIL_USER, // list of receivers
+          subject: `New purchase: ${chargeId}✔`, // Subject line
+          text: "You have a new purchase", // plain text body
+          html: email_template({
+            product_id: chargeId,
+            product_name: "Bifold wallet",
+          }), // html body
+        })
+
+        console.log("Message sent to: %s", client.messageId)
+        console.log("Message sent to: %s", shop.messageId)
       }
 
       main(userEmail).catch(console.error)
