@@ -37,30 +37,41 @@ collections:
           widget: "hidden",
           default: "{{prod_id}}",
         }
+      - { label: "Product ID", name: "prod_id", widget: "string" }
       - {
-          label: "Product ID",
-          name: "prod_id",
-          widget: "products",
-          separator: __,
+          label: "Images",
+          name: "gallery",
+          widget: "image",
+          media_library: { name: "cloudinary", allow_multiple: true },
         }
       - {
           label: "Leather color",
           name: "leather_color",
-          widget: "color",
-          allowInput: "true",
-          required: false,
+          widget: "list",
+          fields:
+            [
+              { label: "Name", name: "name", widget: "string" },
+              {
+                label: "Color",
+                name: "color",
+                widget: "color",
+                allowInput: "true",
+              },
+            ],
         }
       - {
           label: "Thread color",
           name: "thread_color",
-          widget: "color",
-          allowInput: "true",
-          required: false,
+          widget: "list",
+          fields:
+            [
+              { label: "Name", name: "name", widget: "string" },
+              {
+                label: "Color",
+                name: "color",
+                widget: "color",
+                allowInput: "true",
+              },
+            ],
         }
       - { label: "Body", name: "body", widget: "markdown" }
-      - {
-          label: "Images",
-          name: "featuredimage",
-          widget: "image",
-          media_library: { name: "cloudinary", allow_multiple: true },
-        }

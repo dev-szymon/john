@@ -1,9 +1,10 @@
-import React, { useEffect } from "react"
+import React, { useEffect, useState } from "react"
 
-export const ProductPageTemplate = ({ id, preview }) => {
+export const ProductPageTemplate = ({ gallery, id, preview }) => {
+  const [product, setProduct] = useState()
   useEffect(() => {
-    if (preview) {
-      fetch("https://api.stripe.com/v1/products", {
+    if (preview && id) {
+      fetch(`https://api.stripe.com/v1/products/${id}`, {
         method: "GET",
         headers: {
           Accept: "application/json",
@@ -12,12 +13,18 @@ export const ProductPageTemplate = ({ id, preview }) => {
         },
       })
         .then(res => res.json())
-        .then(data => console.log(data))
+        .then(stripe_obj => setProduct(stripe_obj) && console.log(stripe_obj))
     }
-  }, [preview])
+  }, [preview, id])
   return (
     <section>
-      <h1>{id}</h1>
+      {product ? (
+        <>
+          <h2>{product.name}</h2>
+        </>
+      ) : (
+        <p>loading...</p>
+      )}
     </section>
   )
 }

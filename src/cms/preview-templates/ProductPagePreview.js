@@ -7,7 +7,7 @@ const ProductPagePreview = ({ entry, widgetFor }) => {
   const prod_id = entry.getIn(["data", "prod_id"])
   return (
     <div style={{ width: "80%", margin: "2rem auto" }}>
-      <ProductPageTemplate id={prod_id} />
+      <ProductPageTemplate id={prod_id} preview={true} />
     </div>
   )
 }
