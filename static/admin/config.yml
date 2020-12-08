@@ -24,18 +24,13 @@ collections:
     folder: "src/pages/products"
     create: true
     slug: "{{prod_id}}"
+    identifier_field: prod_id
     fields:
       - {
           label: "Template Key",
           name: "template",
           widget: "hidden",
           default: "product",
-        }
-      - {
-          label: "Title",
-          name: "title",
-          widget: "hidden",
-          default: "{{prod_id}}",
         }
       - { label: "Product ID", name: "prod_id", widget: "string" }
       - {
