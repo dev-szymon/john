@@ -9,7 +9,12 @@ const ProductPagePreview = ({ entry, widgetFor }) => {
   console.log(leather_color)
   return (
     <div style={{ width: "80%", margin: "2rem auto" }}>
-      <ProductPageTemplate id={prod_id} preview={true} gallery={gallery} />
+      <ProductPageTemplate
+        id={prod_id}
+        preview={true}
+        leather_color={leather_color}
+        gallery={gallery}
+      />
     </div>
   )
 }

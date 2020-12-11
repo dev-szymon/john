@@ -53,9 +53,17 @@ export const ProductPageTemplate = ({
               )}
             </h5>
             <div>
-              <select>
-                <option></option>
-              </select>
+              {leather_color.map(lc => (
+                <div>
+                  <input
+                    type="radio"
+                    name={id}
+                    id={lc.name}
+                    value={lc.name}
+                  ></input>
+                  <label htmlFor={lc.name}>{lc.name}</label>
+                </div>
+              ))}
             </div>
             <div>
               <input type="number" defaultValue={1}></input>

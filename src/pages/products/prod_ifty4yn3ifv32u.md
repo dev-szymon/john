@@ -6,6 +6,8 @@ gallery:
 leather_color:
   - name: Crimson Rec
     color: "#e20707"
+  - name: Black
+    color: "#000000"
 ---
 
 Bifold Wallet
