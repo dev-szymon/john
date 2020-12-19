@@ -1,41 +1,37 @@
 import { Link } from "gatsby"
 import PropTypes from "prop-types"
-import React from "react"
+import React, { useContext } from "react"
+import { CartContext } from "../context/cartContext"
+import cartIcon from "../images/cart.svg"
+import back from "../images/back.svg"
+import "./header.css"
+import Hamburger from "./Hamburger/Hamburger"
 
-const Header = ({ siteTitle, setCartOpen }) => {
+const Header = ({ siteTitle, setCartOpen, cartOpen }) => {
+  const { cart } = useContext(CartContext)
+
   return (
-    <header
-      style={{
-        background: `#832B2B`,
-        marginBottom: `1.45rem`,
-      }}
-    >
-      <div
-        style={{
-          margin: `0 auto`,
-          maxWidth: 960,
-          padding: `1.45rem 1.0875rem`,
-          display: "flex",
-          color: "white",
-          justifyContent: "space-between",
-        }}
-      >
-        <h1 style={{ margin: 0 }}>
-          <Link
-            to="/"
-            style={{
-              color: `white`,
-              textDecoration: `none`,
-            }}
-          >
-            {siteTitle}
-          </Link>
-        </h1>
-        <button onClick={() => setCartOpen(true)}>cart</button>
-      </div>
+    <header className="header-container">
+      <button className="button-reset" onClick={() => setCartOpen(!cartOpen)}>
+        <div className="cart-icon">
+          {cartOpen ? (
+            <img src={back} alt="back" />
+          ) : (
+            <>
+              <img src={cartIcon} alt="cart" />
+              <div className="cart-counter">{`${cart.length}`}</div>
+            </>
+          )}
+        </div>
+      </button>
+      <h1 className="header-title">
+        <Link to="/">{siteTitle}</Link>
+      </h1>
+      <Hamburger />
     </header>
   )
 }
+
 Header.propTypes = {
   siteTitle: PropTypes.string,
 }

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react"
+import React from "react"
 
 export const ProductPageTemplate = ({
   gallery,
@@ -6,40 +6,19 @@ export const ProductPageTemplate = ({
   preview,
   leather_color,
   thread_color,
+  product,
+  prices,
 }) => {
-  const [product, setProduct] = useState()
-  const [prices, setPrices] = useState()
-  useEffect(() => {
-    if (preview && id) {
-      fetch(`https://api.stripe.com/v1/products/${id}`, {
-        method: "GET",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${process.env.GATSBY_STRIPE_SK}`,
-        },
-      })
-        .then(res => res.json())
-        .then(stripe_obj => setProduct(stripe_obj) && console.log(stripe_obj))
-    }
-
-    fetch(`https://api.stripe.com/v1/prices?product=${id}`, {
-      method: "GET",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${process.env.GATSBY_STRIPE_SK}`,
-      },
-    })
-      .then(res => res.json())
-      .then(({ data }) => setPrices(data))
-  }, [preview, id])
   return (
     <section>
       {product && prices ? (
         <>
           {gallery.map(image => (
-            <img style={{ position: "relative", width: "100%" }} src={image} />
+            <img
+              style={{ position: "relative", width: "100%" }}
+              src={image}
+              alt={id}
+            />
           ))}
           <h2>{product.name}</h2>
           <div>
@@ -52,21 +31,39 @@ export const ProductPageTemplate = ({
                   : p.unit_amount / 100
               )}
             </h5>
-            <div>
+            <div style={{ display: "flex" }}>
               {leather_color.map(lc => (
                 <div>
-                  <input
-                    type="radio"
-                    name={id}
-                    id={lc.name}
-                    value={lc.name}
-                  ></input>
+                  <div
+                    style={{
+                      backgroundColor: lc.color,
+                      padding: "0.1rem",
+                      width: "16px",
+                      height: "16px",
+                      borderRadius: "50%",
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center",
+                    }}
+                  >
+                    <input
+                      style={{ margin: "0" }}
+                      type="radio"
+                      name={id}
+                      id={lc.name}
+                      value={lc.name}
+                    ></input>
+                  </div>
                   <label htmlFor={lc.name}>{lc.name}</label>
                 </div>
               ))}
             </div>
             <div>
-              <input type="number" defaultValue={1}></input>
+              <input
+                type="number"
+                defaultValue={1}
+                style={{ width: "48px" }}
+              ></input>
               <button>add to cart</button>
             </div>
           </div>

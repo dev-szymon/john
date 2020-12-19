@@ -4,7 +4,7 @@ const { worldwide } = require("../src/utils/shipping_countries_allowed")
 exports.handler = async ({ body }) => {
   try {
     const { cartItems, formData } = JSON.parse(body)
-    const { name, address, postal_code, tax_id } = formData
+    const { name, address, postal_code, tax_id, telephone } = formData
 
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ["p24", "card"],
@@ -16,7 +16,7 @@ exports.handler = async ({ body }) => {
       },
       success_url: `${process.env.URL}/success`,
       cancel_url: `${process.env.URL}/cancel`,
-      metadata: { name, address, postal_code, tax_id },
+      metadata: { name, address, postal_code, tax_id, telephone },
     })
 
     return {

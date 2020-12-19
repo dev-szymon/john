@@ -19,6 +19,25 @@ public_folder: /img
 publish_mode: editorial_workflow
 
 collections:
+  - name: "pages"
+    label: "Pages"
+    folder: "src/pages"
+    create: true
+    fields:
+      - {
+          label: "Template Key",
+          name: "template",
+          widget: "hidden",
+          default: "home",
+        }
+      - {
+          label: "Featured Image",
+          name: "featured_image",
+          widget: "image",
+          media_library: { name: "cloudinary", allow_multiple: false },
+        }
+      - { label: "Main Text", name: "main_text", widget: string }
+
   - name: "products"
     label: "Products"
     folder: "src/pages/products"
@@ -68,5 +87,11 @@ collections:
                 allowInput: "true",
               },
             ],
+        }
+      - {
+          label: "PDF",
+          name: "pdf_file",
+          widget: "file",
+          madia_library: { name: "cloudinary" },
         }
       - { label: "Body", name: "body", widget: "markdown" }
