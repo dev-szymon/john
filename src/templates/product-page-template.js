@@ -9,6 +9,7 @@ export const ProductPageTemplate = ({
   product,
   prices,
 }) => {
+  console.log(leather_color)
   return (
     <section>
       {product && prices ? (
@@ -32,7 +33,7 @@ export const ProductPageTemplate = ({
               )}
             </h5>
             <div style={{ display: "flex" }}>
-              {leather_color.map(lc => (
+              {/* {leather_color.map(lc => (
                 <div>
                   <div
                     style={{
@@ -56,7 +57,7 @@ export const ProductPageTemplate = ({
                   </div>
                   <label htmlFor={lc.name}>{lc.name}</label>
                 </div>
-              ))}
+              ))} */}
             </div>
             <div>
               <input

@@ -1,0 +1,9 @@
+.product-card {
+  width: 100%;
+  max-width: 40vw;
+}
+
+.product-grid {
+  display: flex;
+  justify-content: space-between;
+}

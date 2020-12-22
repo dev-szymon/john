@@ -21,22 +21,27 @@ publish_mode: editorial_workflow
 collections:
   - name: "pages"
     label: "Pages"
-    folder: "src/pages"
-    create: true
-    fields:
-      - {
-          label: "Template Key",
-          name: "template",
-          widget: "hidden",
-          default: "home",
-        }
-      - {
-          label: "Featured Image",
-          name: "featured_image",
-          widget: "image",
-          media_library: { name: "cloudinary", allow_multiple: false },
-        }
-      - { label: "Main Text", name: "main_text", widget: string }
+    files:
+      - file: "src/pages/index.md"
+        label: "Home Page"
+        name: "home"
+        slug: /
+        fields:
+          [
+            {
+              label: "Template Key",
+              name: "template",
+              widget: "hidden",
+              default: "home",
+            },
+            {
+              label: "Featured Image",
+              name: "featured_image",
+              widget: "image",
+              media_library: { name: "cloudinary", allow_multiple: false },
+            },
+            { label: "Main Text", name: "main_text", widget: string },
+          ]
 
   - name: "products"
     label: "Products"
@@ -52,6 +57,7 @@ collections:
           default: "product",
         }
       - { label: "Product ID", name: "prod_id", widget: "string" }
+      - { label: "Category", name: "category", widget: "list" }
       - {
           label: "Images",
           name: "gallery",
@@ -64,11 +70,12 @@ collections:
           widget: "list",
           fields:
             [
-              { label: "Name", name: "name", widget: "string" },
+              { label: "Name", name: "name", widget: "string", default: black },
               {
                 label: "Color",
                 name: "color",
                 widget: "color",
+                default: "#000000",
                 allowInput: "true",
               },
             ],
@@ -79,11 +86,12 @@ collections:
           widget: "list",
           fields:
             [
-              { label: "Name", name: "name", widget: "string" },
+              { label: "Name", name: "name", widget: "string", default: black },
               {
                 label: "Color",
                 name: "color",
                 widget: "color",
+                default: "#000000",
                 allowInput: "true",
               },
             ],

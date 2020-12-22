@@ -10,7 +10,8 @@ import PropTypes from "prop-types"
 import { useStaticQuery, graphql } from "gatsby"
 import ShoppingCart from "./shoppingCart"
 import Header from "./header"
-import "./layout.css"
+// import "./layout.css"
+// need to write my own reset
 
 const Layout = ({ children }) => {
   const data = useStaticQuery(graphql`

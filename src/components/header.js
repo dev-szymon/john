@@ -19,7 +19,9 @@ const Header = ({ siteTitle, setCartOpen, cartOpen }) => {
           ) : (
             <>
               <img src={cartIcon} alt="cart" />
-              <div className="cart-counter">{`${cart.length}`}</div>
+              {cart.length > 0 && (
+                <div className="cart-counter">{`${cart.length}`}</div>
+              )}
             </>
           )}
         </div>
