@@ -17,5 +17,6 @@ thread_color:
   - name: Black
     color: "#000000"
 ---
-
 Bifold Wallet
+
+![flower](https://res.cloudinary.com/dq104qc4m/image/upload/v1593449038/sample.jpg "flower")
