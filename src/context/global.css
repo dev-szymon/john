@@ -1,4 +1,5 @@
 @import url("https://fonts.googleapis.com/css?family=Damion&display=swap");
+@import url("https://fonts.googleapis.com/css?family=Roboto&display=swap");
 
 * {
   margin: 0;
@@ -6,10 +7,15 @@
   box-sizing: border-box;
 }
 
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
 img {
   max-width: 100%;
 }
 
 body {
-  background-color: #f1f1f1;
+  background-color: #f6f6f6;
 }

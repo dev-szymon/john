@@ -1,4 +1,5 @@
 .header-container {
+  position: relative;
   width: 100%;
   height: 4rem;
   display: flex;
@@ -6,7 +7,8 @@
   align-items: center;
   padding: 0 1rem;
   background-color: #f1f1f1;
-  box-shadow: 0px 10px 20px 0px #eaeaea;
+  box-shadow: 0px 10px 20px 0px #e1e1e1;
+  z-index: 100;
 }
 
 .header-title {
@@ -52,7 +54,7 @@
 
 .cart-counter {
   background-color: black;
-  color: #f1f1f1;
+  color: #f6f6f6;
   width: 1rem;
   height: 1rem;
   font-size: 0.5rem;

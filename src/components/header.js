@@ -9,7 +9,7 @@ import Hamburger from "./Hamburger/Hamburger"
 
 const Header = ({ siteTitle, setCartOpen, cartOpen }) => {
   const { cart } = useContext(CartContext)
-
+  console.log("render")
   return (
     <header className="header-container">
       <button className="button-reset" onClick={() => setCartOpen(!cartOpen)}>

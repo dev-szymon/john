@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react"
 import PropTypes from "prop-types"
 import { ProductPageTemplate } from "../../templates/product-page-template"
+
 const ProductPagePreview = ({ entry, widgetFor }) => {
   const gallery = [...entry.getIn(["data", "gallery"])]
   // const body = widgetFor("body")
@@ -38,14 +39,18 @@ const ProductPagePreview = ({ entry, widgetFor }) => {
 
   return (
     <div style={{ width: "80%", margin: "2rem auto" }}>
-      <ProductPageTemplate
-        id={prod_id}
-        preview={true}
-        leather_color={leather_color}
-        gallery={gallery}
-        prices={prices}
-        product={product}
-      />
+      {product && prices ? (
+        <ProductPageTemplate
+          id={prod_id}
+          preview={true}
+          leather_color={leather_color}
+          gallery={gallery}
+          prices={prices}
+          name={product.name}
+        />
+      ) : (
+        <p>loading...</p>
+      )}
     </div>
   )
 }

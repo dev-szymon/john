@@ -1,42 +1,11 @@
 const { createFilePath } = require("gatsby-source-filesystem")
-const fetch = require("isomorphic-fetch")
 const path = require("path")
 const { clean } = require("diacritic")
 const _ = require("lodash")
 const md5 = require("md5")
+const { createRemoteFileNode } = require("gatsby-source-filesystem")
 
 const stripe = require("stripe")(process.env.GATSBY_STRIPE_SK)
-
-// const getProductPrices = async id => {
-//   const response = await fetch(
-//     `https://api.stripe.com/v1/prices?product=${id}&active=true`,
-//     {
-//       method: "GET",
-//       headers: {
-//         Accept: "application/json",
-//         "Content-Type": "application/json",
-//         Authorization: `Bearer ${process.env.GATSBY_STRIPE_SK}`,
-//       },
-//     }
-//   )
-//   const prices = await response.json()
-//   return prices
-// }
-
-// const getProductData = async id => {
-//   const response = await fetch(`https://api.stripe.com/v1/products/${id}`, {
-//     method: "GET",
-//     headers: {
-//       Accept: "application/json",
-//       "Content-Type": "application/json",
-//       Authorization: `Bearer ${process.env.GATSBY_STRIPE_SK}`,
-//     },
-//   })
-
-//   const product = await response.json()
-
-//   return product
-// }
 
 exports.createPages = async ({ graphql, actions }) => {
   const { createPage } = actions
@@ -52,6 +21,7 @@ exports.createPages = async ({ graphql, actions }) => {
             }
             frontmatter {
               template
+              gallery
               category
               leather_color {
                 name
@@ -69,6 +39,17 @@ exports.createPages = async ({ graphql, actions }) => {
   `)
 
   return pagesQuery.data.allMarkdownRemark.edges.forEach(page => {
+    const { node } = page
+    const { template } = node.frontmatter
+
+    createPage({
+      path: node.fields.slug,
+      component: path.resolve(`src/templates/${template}-page-template.js`),
+      context: {
+        id: node.id,
+      },
+    })
+
     // ----creating categories pages----
     let categories = []
     // Iterate through each post, putting all found categories into `categories`
@@ -93,10 +74,20 @@ exports.createPages = async ({ graphql, actions }) => {
   })
 }
 
-exports.onCreateNode = async ({ node, actions, getNode }) => {
-  const { createNodeField } = actions
+exports.onCreateNode = async ({
+  node,
+  actions,
+  getNode,
+  cache,
+  store,
+  createNodeId,
+}) => {
+  const { createNodeField, createNode } = actions
 
-  if (node.internal.type === `MarkdownRemark`) {
+  if (
+    node.internal.type === `MarkdownRemark` &&
+    node.frontmatter.template !== "product"
+  ) {
     value = createFilePath({ node, getNode })
     createNodeField({
       name: `slug`,
@@ -106,13 +97,50 @@ exports.onCreateNode = async ({ node, actions, getNode }) => {
   }
 
   if (node.frontmatter && node.frontmatter.template === "product") {
-    const { prod_id, category, leather_color, thread_color } = node.frontmatter
+    const {
+      prod_id,
+      category,
+      leather_color,
+      thread_color,
+      gallery,
+    } = node.frontmatter
     const prices = await stripe.prices.list({
       active: true,
       product: prod_id,
     })
-
     const product = await stripe.products.retrieve(prod_id)
+
+    // for each url in frontmatter.gallery create a gatsby image node
+
+    const createGallery = async gallery => {
+      let galleryNodes = []
+
+      gallery.map(async image => {
+        let fileNode = await createRemoteFileNode({
+          url: image, // string that points to the URL of the image
+          // parentNodeId: node.id, // id of the parent node of the fileNode you are going to create
+          createNode, // helper function in gatsby-node to generate the node
+          createNodeId, // helper function in gatsby-node to generate the node id
+          cache, // Gatsby's cache
+          store, // Gatsby's Redux store
+        })
+
+        if (fileNode) {
+          galleryNodes = galleryNodes.concat(fileNode)
+        }
+      })
+      return createNode({
+        id: createNodeId("gallery-id"),
+        parent: node.id,
+        gallery: galleryNodes,
+        internal: {
+          contentDigest: md5(JSON.stringify(galleryNodes)),
+          type: "Array",
+        },
+      })
+    }
+
+    createGallery(gallery)
 
     // if there are changes to metadata in frontmatter, update stripe products
 
@@ -132,6 +160,12 @@ exports.onCreateNode = async ({ node, actions, getNode }) => {
       })
       console.log(`Product ${prod_id} metadata updated.`)
     }
+
+    createNodeField({
+      name: `slug`,
+      node,
+      value: `/products/${_.kebabCase(clean(product.name))}`,
+    })
 
     createNodeField({
       name: `prices`,

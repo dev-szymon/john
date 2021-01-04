@@ -1,4 +1,8 @@
 import React from "react"
+import Layout from "../components/layout"
+import { graphql } from "gatsby"
+import ImageGallery from "../components/imageGallery/imageGallery"
+import "./product-page.css"
 
 export const ProductPageTemplate = ({
   gallery,
@@ -6,72 +10,95 @@ export const ProductPageTemplate = ({
   preview,
   leather_color,
   thread_color,
-  product,
+  name,
   prices,
 }) => {
   console.log(leather_color)
   return (
-    <section>
-      {product && prices ? (
-        <>
-          {gallery.map(image => (
-            <img
-              style={{ position: "relative", width: "100%" }}
-              src={image}
-              alt={id}
-            />
-          ))}
-          <h2>{product.name}</h2>
-          <div>
-            <h5>
-              {prices.map(p =>
-                p.currency !== "pln"
-                  ? null
-                  : p.metadata?.promotion
-                  ? null
-                  : p.unit_amount / 100
-              )}
-            </h5>
-            <div style={{ display: "flex" }}>
-              {/* {leather_color.map(lc => (
-                <div>
-                  <div
-                    style={{
-                      backgroundColor: lc.color,
-                      padding: "0.1rem",
-                      width: "16px",
-                      height: "16px",
-                      borderRadius: "50%",
-                      display: "flex",
-                      justifyContent: "center",
-                      alignItems: "center",
-                    }}
-                  >
-                    <input
-                      style={{ margin: "0" }}
-                      type="radio"
-                      name={id}
-                      id={lc.name}
-                      value={lc.name}
-                    ></input>
-                  </div>
-                  <label htmlFor={lc.name}>{lc.name}</label>
-                </div>
-              ))} */}
-            </div>
+    <section className="product-section">
+      <div className="image-gallery">
+        <ImageGallery gallery={gallery} />
+      </div>
+      <h2>{name}</h2>
+      <div>
+        <span>{`${prices[0].unit_amount / 100} ${prices[0].currency}`}</span>
+        <div style={{ display: "flex" }}>
+          {leather_color.map(lc => (
             <div>
-              <input
-                type="number"
-                defaultValue={1}
-                style={{ width: "48px" }}
-              ></input>
-              <button>add to cart</button>
+              <div
+                style={{
+                  backgroundColor: lc.color,
+                  padding: "0.1rem",
+                  width: "16px",
+                  height: "16px",
+                  borderRadius: "50%",
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                }}
+              >
+                <input
+                  style={{ margin: "0" }}
+                  type="radio"
+                  name={id}
+                  id={lc.name}
+                  value={lc.name}
+                ></input>
+              </div>
+              <label htmlFor={lc.name}>{lc.name}</label>
             </div>
-          </div>
-        </>
-      ) : (
-        <p>loading...</p>
-      )}
+          ))}
+        </div>
+        <div>
+          <input
+            type="number"
+            defaultValue={1}
+            style={{ width: "48px" }}
+          ></input>
+          <button>add to cart</button>
+        </div>
+      </div>
     </section>
   )
 }
+
+const ProductPage = ({ data }) => {
+  const { html, frontmatter, fields, gallery } = data.markdownRemark
+  return (
+    <Layout>
+      <ProductPageTemplate
+        gallery={gallery}
+        prices={fields.prices}
+        name={fields.name}
+        leather_color={frontmatter.leather_color}
+      />
+    </Layout>
+  )
+}
+
+export default ProductPage
+
+export const ProductPageQuery = graphql`
+  query ProductPage($id: String!) {
+    markdownRemark(id: { eq: $id }) {
+      html
+      frontmatter {
+        title
+        template
+        prod_id
+        leather_color {
+          name
+          color
+        }
+      }
+      fields {
+        prices {
+          id
+          currency
+          unit_amount
+        }
+        name
+      }
+    }
+  }
+`
