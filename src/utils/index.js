@@ -29,4 +29,25 @@ const getProductData = async id => {
   return product
 }
 
-export { getProductPrices, getProductData }
+const createCartItem = (product, fields, variant) => {
+  return {
+    product: product,
+    fields: fields,
+    variant: variant,
+  }
+}
+
+const getMatchingCurrency = (prices, currency) => {
+  try {
+    const filtered = prices
+      .filter(price => price.currency.toLowerCase() === currency.toLowerCase())
+      .reduce((prev, current) =>
+        prev.price.amount > current.price.amount ? prev : current
+      )
+    return filtered
+  } catch (err) {
+    console.log(err)
+  }
+}
+
+export { getProductPrices, getProductData, createCartItem, getMatchingCurrency }

@@ -3,7 +3,7 @@ const path = require("path")
 const { clean } = require("diacritic")
 const _ = require("lodash")
 const md5 = require("md5")
-const { createRemoteFileNode } = require("gatsby-source-filesystem")
+const fetch = require("isomorphic-fetch")
 
 const stripe = require("stripe")(process.env.GATSBY_STRIPE_SK)
 
@@ -21,7 +21,6 @@ exports.createPages = async ({ graphql, actions }) => {
             }
             frontmatter {
               template
-              gallery
               category
               leather_color {
                 name
@@ -104,43 +103,8 @@ exports.onCreateNode = async ({
       thread_color,
       gallery,
     } = node.frontmatter
-    const prices = await stripe.prices.list({
-      active: true,
-      product: prod_id,
-    })
+
     const product = await stripe.products.retrieve(prod_id)
-
-    // for each url in frontmatter.gallery create a gatsby image node
-
-    const createGallery = async gallery => {
-      let galleryNodes = []
-
-      gallery.map(async image => {
-        let fileNode = await createRemoteFileNode({
-          url: image, // string that points to the URL of the image
-          // parentNodeId: node.id, // id of the parent node of the fileNode you are going to create
-          createNode, // helper function in gatsby-node to generate the node
-          createNodeId, // helper function in gatsby-node to generate the node id
-          cache, // Gatsby's cache
-          store, // Gatsby's Redux store
-        })
-
-        if (fileNode) {
-          galleryNodes = galleryNodes.concat(fileNode)
-        }
-      })
-      return createNode({
-        id: createNodeId("gallery-id"),
-        parent: node.id,
-        gallery: galleryNodes,
-        internal: {
-          contentDigest: md5(JSON.stringify(galleryNodes)),
-          type: "Array",
-        },
-      })
-    }
-
-    createGallery(gallery)
 
     // if there are changes to metadata in frontmatter, update stripe products
 
@@ -167,6 +131,11 @@ exports.onCreateNode = async ({
       value: `/products/${_.kebabCase(clean(product.name))}`,
     })
 
+    const prices = await stripe.prices.list({
+      active: true,
+      product: prod_id,
+    })
+
     createNodeField({
       name: `prices`,
       node,
@@ -179,4 +148,90 @@ exports.onCreateNode = async ({
       value: product.name,
     })
   }
+}
+
+exports.createResolvers = ({ createResolvers }) => {
+  const createCloudinaryGalleryNode = async src => {
+    const aspectRatio = 1.5
+    const srcSetWidths = [160, 320, 640, 900]
+    const r = /\/upload\/v/
+    const srcSet = (widths, cloudinaryUrl) => {
+      return widths
+        .map(w => {
+          const transformations = `/upload/c_fill,h_${Math.floor(
+            w / aspectRatio
+          )},w_${w}/v`
+          return `${cloudinaryUrl.replace(r, transformations)} ${w}w`
+        })
+        .join()
+    }
+
+    // todo make it detect the extension
+
+    const getBase64 = async url => {
+      const response = await fetch(url)
+      const buffer = await response.arrayBuffer()
+      const base64 = Buffer.from(buffer).toString("base64")
+      return `data:image/jpeg;base64,${base64}`
+    }
+
+    const base64 = await getBase64(src.replace(r, `/upload/w_30/v`))
+    const n = `/upload/c_fill,h_600,w_900/v`
+
+    const ratioAdjusted = src.replace(r, n)
+
+    return {
+      aspectRatio,
+      base64: base64,
+      sizes: "(max-width: 900px) 100vw, 900px",
+      src: ratioAdjusted,
+      srcSet: srcSet(srcSetWidths, src),
+    }
+  }
+
+  const resolvers = {
+    Frontmatter: {
+      featured_image: {
+        resolve: (source, args, context, info) => {
+          if (!source.featured_image) {
+            return
+          }
+          return createCloudinaryGalleryNode(source.featured_image)
+        },
+      },
+      gallery: {
+        resolve: (source, args, context, info) => {
+          if (!source.gallery) {
+            return
+          }
+
+          return source.gallery.map(src => createCloudinaryGalleryNode(src))
+        },
+      },
+    },
+  }
+
+  createResolvers(resolvers)
+}
+
+exports.createSchemaCustomization = ({ actions }) => {
+  const { createTypes } = actions
+  const typeDefs = `
+    type MarkdownRemark implements Node {
+      frontmatter: Frontmatter
+    }
+    type Frontmatter {
+      gallery: [CloudinaryGalleryNode] 
+      featured_image: CloudinaryGalleryNode
+    }
+    type CloudinaryGalleryNode {
+      aspectRatio: Float!
+      base64: String!
+      sizes: String!
+      src: String!
+      srcSet: String!
+    }
+  `
+
+  createTypes(typeDefs)
 }

@@ -5,13 +5,10 @@
  * See: https://www.gatsbyjs.com/docs/use-static-query/
  */
 
-import React, { useState } from "react"
+import React from "react"
 import PropTypes from "prop-types"
 import { useStaticQuery, graphql } from "gatsby"
-import ShoppingCart from "./shoppingCart"
 import Header from "./header"
-// import "./layout.css"
-// need to write my own reset
 
 const Layout = ({ children }) => {
   const data = useStaticQuery(graphql`
@@ -23,31 +20,20 @@ const Layout = ({ children }) => {
       }
     }
   `)
-  const [cartOpen, setCartOpen] = useState(false)
 
   return (
     <>
-      <Header
-        siteTitle={data.site.siteMetadata?.title || `Title`}
-        setCartOpen={setCartOpen}
-        cartOpen={cartOpen}
-      />
-      {cartOpen ? (
-        <ShoppingCart setCartOpen={setCartOpen} />
-      ) : (
-        <>
-          <main>{children}</main>
-          <footer
-            style={{
-              marginTop: `2rem`,
-            }}
-          >
-            © {new Date().getFullYear()}, Built with
-            {` `}
-            <a href="https://www.gatsbyjs.com">Gatsby</a>
-          </footer>
-        </>
-      )}
+      <Header siteTitle={data.site.siteMetadata?.title || `Title`} />
+      <main>{children}</main>
+      <footer
+        style={{
+          marginTop: `2rem`,
+        }}
+      >
+        © {new Date().getFullYear()}, Built with
+        {` `}
+        <a href="https://www.gatsbyjs.com">Gatsby</a>
+      </footer>
     </>
   )
 }

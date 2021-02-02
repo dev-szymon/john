@@ -1,5 +1,5 @@
 import React from "react"
-import CartProvider from "./cartContext"
+import { CartProvider } from "./cartContext"
 import "./global.css"
 
 export const wrapRootElement = ({ element }) => {

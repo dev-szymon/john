@@ -3,20 +3,19 @@ import "./imageGallery.css"
 import Img from "gatsby-image"
 
 const ImageGallery = ({ gallery }) => {
-  // const [imageIndex, setImageIndex] = useState(gallery[0])
+  const [currentIndex, setCurrentIndex] = useState(0)
   return (
     <div className="gallery-container">
-      {/* <img
-        className="featured-image"
-        src={gallery[imageIndex]}
-        alt="featured"
-      /> */}
+      <Img className="featured-image" fluid={gallery[currentIndex]} />
       <div className="image-list">
-        {gallery.map(image => (
-          <Img
-            fluid={image.childImageSharp.fluid}
-            onClick={() => setImageIndex(image)}
-          />
+        {gallery.map((image, index) => (
+          <div
+            className="image-list_item"
+            key={`${image.src} ${index}`}
+            onClick={() => setCurrentIndex(index)}
+          >
+            <Img fluid={image} />
+          </div>
         ))}
       </div>
     </div>

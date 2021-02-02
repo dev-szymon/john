@@ -3,6 +3,7 @@ import Layout from "../../components/layout"
 import SEO from "../../components/seo"
 import ProductCard from "../../components/productCard/productCard"
 import { graphql, Link } from "gatsby"
+import Img from "gatsby-image"
 
 const ProductsPage = ({ data }) => {
   const { edges } = data.allMarkdownRemark
@@ -12,15 +13,14 @@ const ProductsPage = ({ data }) => {
       <div style={{ height: "4rem", width: "100%" }}></div>
       <div className="product-grid">
         {edges.map(({ node }) => {
-          const { frontmatter, fields } = node
+          const {
+            fields,
+            frontmatter: { gallery },
+          } = node
           return (
             <Link to={fields.slug} key={node.id}>
               <ProductCard>
-                <img
-                  className="product-card_image"
-                  src={frontmatter.gallery[0]}
-                  alt={fields.name}
-                />
+                <Img className="product-card_image" fluid={gallery[0]} />
                 <div className="product-card_details">
                   <div className="product-card_price">
                     <span>{`${fields.prices[0].unit_amount / 100} ${
@@ -52,7 +52,13 @@ export const ProductsPageQuery = graphql`
             title
             template
             prod_id
-            gallery
+            gallery {
+              src
+              srcSet
+              base64
+              sizes
+              aspectRatio
+            }
           }
           fields {
             prices {

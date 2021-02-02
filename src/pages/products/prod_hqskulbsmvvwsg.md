@@ -13,6 +13,10 @@ leather_color:
 thread_color:
   - name: Crimson Red
     color: "#e20707"
+  - name: Crimson Red
+    color: "#e21607"
+  - name: Golden
+    color: "#f3c707"
   - name: Black
     color: "#000000"
 ---

@@ -1,0 +1,36 @@
+.main-text {
+  font-family: Rhodium Libre;
+  text-align: center;
+  font-size: 2rem;
+  line-height: 130%;
+  margin: 1.5rem 0;
+}
+
+.secondary-text {
+  font-family: Roboto;
+  text-align: center;
+  width: 80%;
+  margin: 0 auto 2rem;
+}
+
+.home-page_typography {
+  margin: 0 auto;
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.action-button {
+  position: relative;
+  max-width: 200px;
+  text-align: center;
+  font-family: Rhodium Libre;
+  font-size: 1.5rem;
+  padding: 0.25rem 2.5rem;
+  color: #f6f6f6;
+  background-color: #832b2b;
+
+  box-shadow: 0px 4px 20px 0px rgb(131, 43, 43, 0.5);
+  border-radius: 1rem;
+}

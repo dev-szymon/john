@@ -1,10 +1,10 @@
 import React from "react"
 import "./Hamburger.css"
 
-const Hamburger = ({ open, setOpen, handlerBoolean }) => {
+const Hamburger = ({ open, handler }) => {
   return (
     <button
-      onClick={() => setOpen(handlerBoolean)}
+      onClick={() => handler()}
       className={`hamburger-button ${open && "open"}`}
     >
       <div className="hamburger-container">

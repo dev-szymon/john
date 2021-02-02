@@ -101,5 +101,6 @@ collections:
           name: "pdf_file",
           widget: "file",
           madia_library: { name: "cloudinary" },
+          required: false,
         }
       - { label: "Body", name: "body", widget: "markdown" }
