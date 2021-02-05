@@ -3,22 +3,22 @@
   position: relative;
   display: flex;
   flex-wrap: wrap;
-  perspective: 1000;
-  -webkit-perspective: 1000;
+  align-items: center;
+  transform-style: preserve-3d;
+  -webkit-transform-style: preserve-3d;
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
-  align-items: center;
 }
 
 .color-option {
   position: relative;
   width: 2rem;
   height: 2rem;
-  perspective: 1000;
-  -webkit-perspective: 1000;
+  visibility: hidden;
+  transform-style: preserve-3d;
+  -webkit-transform-style: preserve-3d;
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
-  visibility: hidden;
 }
 
 .color-option:after {
@@ -27,8 +27,6 @@
   border-radius: 100%;
   position: absolute;
   top: 50%;
-  backface-visibility: hidden;
-  -webkit-backface-visibility: hidden;
   transform: translateY(-50%);
   left: 50%;
   background-color: inherit;
@@ -36,18 +34,24 @@
   display: block;
   visibility: visible;
   border: 1px solid #f1f1f1;
+  transform-style: preserve-3d;
+  -webkit-transform-style: preserve-3d;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
 }
 
 .color-option:checked:after {
   width: 1.5rem;
   height: 1.5rem;
   border-radius: 100%;
-  backface-visibility: hidden;
-  -webkit-backface-visibility: hidden;
   position: absolute;
   background-color: inherit;
   content: "";
   display: block;
   visibility: visible;
   box-shadow: 0px 0px 0px 3px black;
+  transform-style: preserve-3d;
+  -webkit-transform-style: preserve-3d;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
 }
