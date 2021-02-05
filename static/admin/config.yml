@@ -56,7 +56,7 @@ collections:
           widget: "hidden",
           default: "product",
         }
-      - { label: "Product ID", name: "prod_id", widget: "string" }
+      - { label: "Product ID", name: "prod_id", widget: "dynamicSelect" }
       - { label: "Category", name: "category", widget: "list" }
       - {
           label: "Images",

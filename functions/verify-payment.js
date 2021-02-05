@@ -59,7 +59,11 @@ exports.handler = async ({ body, headers }) => {
         const constructItems = items.map(i => {
           const { description } = i
           const variants = JSON.parse(i.price.product.metadata.data)
-          return { ...i, ...parseVariant(description, variants) }
+          return {
+            ...i,
+            ...parseVariant(description, variants),
+            total_item_amount: (i.quantity * i.price.unit_amount) / 100,
+          }
         })
 
         const order_email = fs.readFileSync("./functions/order.hbs").toString()
@@ -72,42 +76,12 @@ exports.handler = async ({ body, headers }) => {
 
         const order_context = {
           products: constructItems,
-          charge: charge,
+          charge: { ...charge, charge_amount: charge.amount / 100 },
           session_metadata: session_metadata,
         }
 
         return renderToString(order_email, order_context)
       }
-      // const order_email = fs.readFile("./functions/order.hbs", async function (
-      //   err,
-      //   data
-      // ) {
-      //   if (!err) {
-      //     // this will be called after the file is read
-
-      //     // make the buffer into a string
-      //     const source = data.toString()
-      //     // call the render function
-      //     const context = {
-      //       products: constructItems,
-      //       charge: charge,
-      //       session_metadata: session_metadata,
-      //     }
-
-      //     const email = await renderToString(source, context)
-
-      //     return email
-      //   } else {
-      //     // handle file read error
-      //     console.log(err)
-      //   }
-      //   async function renderToString(source, context) {
-      //     const template = Handlebars.compile(source)
-      //     const outputString = template(context)
-      //     console.log(outputString)
-      //     return outputString
-      //   }
-      // })
 
       // async..await is not allowed in global scope, must use a wrapper
       async function main(mail) {
@@ -115,8 +89,8 @@ exports.handler = async ({ body, headers }) => {
         let transporter = nodemailer.createTransport({
           service: "Gmail",
           auth: {
-            user: process.env.GMAIL_USER, // generated ethereal user
-            pass: process.env.GMAIL_PASS, // generated ethereal password
+            user: process.env.GMAIL_USER,
+            pass: process.env.GMAIL_PASS,
           },
         })
 
@@ -138,12 +112,10 @@ exports.handler = async ({ body, headers }) => {
 
         // console.log("Message sent to: %s", client.messageId)
         console.log("Message sent to: %s", shop.messageId)
+        console.log("Message sent to: %s", shop)
       }
 
-      main(userEmail).catch(console.error)
-
-      // Fulfill the purchase...
-      // handleCheckoutSession(session)
+      await main(userEmail).catch(console.error)
 
       return {
         statusCode: 200,

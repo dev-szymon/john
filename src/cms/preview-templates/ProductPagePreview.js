@@ -3,11 +3,10 @@ import PropTypes from "prop-types"
 import { ProductPageTemplate } from "../../templates/product-page-template"
 
 const ProductPagePreview = ({ entry, widgetFor }) => {
-  const gallery = [...entry.getIn(["data", "gallery"])]
+  const gallery = [...entry.getIn(["data", "gallery"])] || []
   // const body = widgetFor("body")
   const prod_id = entry.getIn(["data", "prod_id"])
   const leather_color = entry.getIn(["data", "leather_color"])
-
   const [product, setProduct] = useState()
   const [prices, setPrices] = useState()
 

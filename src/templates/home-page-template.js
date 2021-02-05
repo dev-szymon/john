@@ -11,7 +11,7 @@ export const HomePageTemplate = ({
 }) => {
   return (
     <section>
-      <Img fluid={featured_image} />
+      <Img fluid={featured_image} className="hero-image" />
       <div className="home-page_typography">
         <h2 className="main-text">{main_text}</h2>
         <p className="secondary-text">{secondary_text}</p>

@@ -286,7 +286,7 @@
                                                                                         {{this.quantity}}</td>
                                                                                     <td
                                                                                         style="padding: 0 0 0 15px;font-size:16px;font-weight:500;font-family:Roboto;text-align:right;">
-                                                                                        {{this.price.unit_amount}}
+                                                                                        {{this.total_item_amount}}
                                                                                         {{this.price.currency}}</td>
                                                                                 </tr>
                                                                             </table>
@@ -311,7 +311,7 @@
                                                             style="font-size:0px;padding:0 15px;word-break:break-word;">
                                                             <div
                                                                 style="font-family:Ubuntu, Helvetica, Arial, sans-serif;font-size:32px;font-weight:600;line-height:1;text-align:right;color:#000000;">
-                                                                {{charge.amount}} {{charge.currency}}</div>
+                                                                {{charge.charge_amount}} {{charge.currency}}</div>
                                                         </td>
                                                     </tr>
                                                 </table>
@@ -386,21 +386,14 @@
                                         <td align="left" style="font-size:0px;padding:4px 35px;word-break:break-word;">
                                             <div
                                                 style="font-family:Ubuntu, Helvetica, Arial, sans-serif;font-size:13px;line-height:1;text-align:left;color:#000000;">
-                                                {{session_metadata.postal_code}}</div>
+                                                {{session_metadata.postal_code}} {{session_metadata.city}}</div>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td align="left" style="font-size:0px;padding:4px 35px;word-break:break-word;">
                                             <div
                                                 style="font-family:Ubuntu, Helvetica, Arial, sans-serif;font-size:13px;line-height:1;text-align:left;color:#000000;">
-                                                {{session_metadata.city}}</div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td align="left" style="font-size:0px;padding:4px 35px;word-break:break-word;">
-                                            <div
-                                                style="font-family:Ubuntu, Helvetica, Arial, sans-serif;font-size:13px;line-height:1;text-align:left;color:#000000;">
-                                                {{session_metadata.tax_id}}</div>
+                                                NIP {{session_metadata.tax_id}}</div>
                                         </td>
                                     </tr>
                                 </table>
@@ -455,16 +448,11 @@
                                         <td align="left" style="font-size:0px;padding:4px 35px;word-break:break-word;">
                                             <div
                                                 style="font-family:Ubuntu, Helvetica, Arial, sans-serif;font-size:13px;line-height:1;text-align:left;color:#000000;">
-                                                {{charge.shipping.address.postal_code}}</div>
+                                                {{charge.shipping.address.postal_code}} {{charge.shipping.address.city}}
+                                            </div>
                                         </td>
                                     </tr>
-                                    <tr>
-                                        <td align="left" style="font-size:0px;padding:4px 35px;word-break:break-word;">
-                                            <div
-                                                style="font-family:Ubuntu, Helvetica, Arial, sans-serif;font-size:13px;line-height:1;text-align:left;color:#000000;">
-                                                {{charge.shipping.address.city}}</div>
-                                        </td>
-                                    </tr>
+
                                 </table>
                             </div>
                             <!--[if mso | IE]>

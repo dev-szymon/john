@@ -1,6 +1,6 @@
 import React, { useReducer, useContext, createContext, useEffect } from "react"
 
-const CartStateContext = createContext()
+const CartStateContext = createContext({ items: [], currency: "EUR" })
 const CartDispatchContext = createContext()
 
 const reducer = (state, action) => {

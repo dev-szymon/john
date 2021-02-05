@@ -6,6 +6,10 @@
   margin: 1.5rem 0;
 }
 
+.hero-image {
+  height: 60vh;
+}
+
 .secondary-text {
   font-family: Roboto;
   text-align: center;
