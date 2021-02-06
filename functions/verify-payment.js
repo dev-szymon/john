@@ -3,16 +3,13 @@ const stripe = require("stripe")(process.env.GATSBY_STRIPE_SK)
 const nodemailer = require("nodemailer")
 const Handlebars = require("handlebars")
 const fs = require("fs")
-// const source = require("./order.hbs")
 
-exports.handler = async ({ body, headers }) => {
+exports.handler = async ({ rawBody, headers }) => {
   const endpointSecret = process.env.STRIPE_WEBHOOK_SECRET
-
-  console.log(endpointSecret)
 
   try {
     const stripeEvent = stripe.webhooks.constructEvent(
-      body,
+      rawBody,
       headers["stripe-signature"],
       endpointSecret
     )

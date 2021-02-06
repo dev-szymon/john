@@ -10,3 +10,5 @@ fs.writeFileSync(
   CLOUDINARY_API_KEY=${process.env.CLOUDINARY_API_KEY}\n
   CLOUDINARY_API_SECRET=${process.env.CLOUDINARY_API_SECRET}\n`
 )
+
+console.log(`Enviroment variables created`)
