@@ -44,7 +44,7 @@
   ],
   "license": "0BSD",
   "scripts": {
-    "build": "node ./src/scripts/index.js && gatsby build",
+    "build": "node ./src/utils/script.js && gatsby build",
     "develop": "gatsby develop",
     "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md}\"",
     "start": "npm run develop",
