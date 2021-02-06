@@ -19,6 +19,9 @@ exports.handler = async ({ body }) => {
       return {
         price: item.chosen_price,
         quantity: item.chosen_variant.quantity,
+        // verify-payment endpoint relies on this description format,
+        // because it parses variant names to verify that they are available on the product
+        // and to extract color data from stripe metadata
         description: `LEATHER: ${item.chosen_variant.leather.name} - THREAD: ${item.chosen_variant.thread.name}`,
       }
     })
