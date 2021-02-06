@@ -3,9 +3,10 @@ const stripe = require("stripe")(process.env.GATSBY_STRIPE_SK)
 const nodemailer = require("nodemailer")
 const Handlebars = require("handlebars")
 const fs = require("fs")
-const endpointSecret = process.env.STRIPE_WEBHOOK_SECRET
 
 exports.handler = async ({ body, headers }) => {
+  const endpointSecret = process.env.STRIPE_WEBHOOK_SECRET
+
   try {
     const stripeEvent = stripe.webhooks.constructEvent(
       body,
@@ -129,7 +130,7 @@ exports.handler = async ({ body, headers }) => {
     console.log(err.message)
     return {
       statusCode: 400,
-      body: `Webhook error: ${endpointSecret} ${err.message}`,
+      body: `Webhook error: ${err.message}`,
     }
   }
 }
