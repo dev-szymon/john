@@ -8,6 +8,8 @@ const fs = require("fs")
 exports.handler = async ({ body, headers }) => {
   const endpointSecret = process.env.STRIPE_WEBHOOK_SECRET
 
+  console.log(endpointSecret)
+
   try {
     const stripeEvent = stripe.webhooks.constructEvent(
       body,
@@ -131,7 +133,7 @@ exports.handler = async ({ body, headers }) => {
     console.log(err.message)
     return {
       statusCode: 400,
-      body: `Webhook error: ${err.message}`,
+      body: `Webhook error: ${endpointSecret} ${err.message}`,
     }
   }
 }

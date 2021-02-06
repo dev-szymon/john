@@ -10,7 +10,7 @@ const ProductsPage = ({ data }) => {
   return (
     <Layout>
       <SEO title="Page two" />
-      <div style={{ height: "4rem", width: "100%" }}></div>
+      <div style={{ height: "2rem", width: "100%" }}></div>
       <div className="product-grid">
         {edges.map(({ node }) => {
           const {
