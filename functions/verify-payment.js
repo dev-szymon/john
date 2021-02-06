@@ -4,12 +4,12 @@ const nodemailer = require("nodemailer")
 const Handlebars = require("handlebars")
 const fs = require("fs")
 
-exports.handler = async ({ body, headers }) => {
+exports.handler = async ({ rawBody, headers }) => {
   const endpointSecret = process.env.STRIPE_WEBHOOK_SECRET
 
   try {
     const stripeEvent = stripe.webhooks.constructEvent(
-      body,
+      rawBody,
       headers["stripe-signature"],
       endpointSecret
     )
@@ -130,7 +130,7 @@ exports.handler = async ({ body, headers }) => {
     console.log(err.message)
     return {
       statusCode: 400,
-      body: `Webhook error: ${err.message}`,
+      body: `Webhook error: rawBody : ${err.message}`,
     }
   }
 }
