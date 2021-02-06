@@ -6,6 +6,7 @@ const stripe = require("stripe")(process.env.GATSBY_STRIPE_SK)
 
 exports.handler = async ({ body, headers }) => {
   const endpointSecret = process.env.STRIPE_WEBHOOK_SECRET
+  console.log(endpointSecret)
 
   try {
     const stripeEvent = stripe.webhooks.constructEvent(
