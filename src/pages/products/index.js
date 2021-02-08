@@ -17,17 +17,24 @@ const ProductsPage = ({ data }) => {
             fields,
             frontmatter: { gallery },
           } = node
+
+          const { compareAt } = fields.prices[0].metadata
           return (
             <Link to={fields.slug} key={node.id}>
               <ProductCard>
                 <Img className="product-card_image" fluid={gallery[0]} />
                 <div className="product-card_details">
+                  <h4 className="product-card_name">{fields.name}</h4>
                   <div className="product-card_price">
-                    <span>{`${fields.prices[0].unit_amount / 100} ${
-                      fields.prices[0].currency
-                    }`}</span>
+                    {compareAt && (
+                      <span className="compare-price">{`${
+                        Number(compareAt) / 100
+                      } ${fields.prices[0].currency}`}</span>
+                    )}
+                    <span className="actual-price">{`${
+                      fields.prices[0].unit_amount / 100
+                    } ${fields.prices[0].currency}`}</span>
                   </div>
-                  <h3 className="product-card_name">{fields.name}</h3>
                 </div>
               </ProductCard>
             </Link>
@@ -65,6 +72,9 @@ export const ProductsPageQuery = graphql`
               id
               currency
               unit_amount
+              metadata {
+                compareAt
+              }
             }
             name
             slug

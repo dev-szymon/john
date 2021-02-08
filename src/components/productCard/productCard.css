@@ -16,6 +16,9 @@
 .product-card_details {
   padding: 0.675rem;
   height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .product-card_image {
@@ -29,11 +32,24 @@
 .product-card_price {
   font-size: 1rem;
   text-transform: uppercase;
-  margin-bottom: 1rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.actual-price {
+  font-weight: 600;
+}
+
+.compare-price {
+  font-size: 0.875rem;
+  text-decoration: line-through;
+  opacity: 0.6;
 }
 
 .product-card_name {
   font-size: 1rem;
+  font-weight: 400;
+  margin-bottom: 0.675rem;
 }
 
 .product-grid {

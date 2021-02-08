@@ -4,7 +4,7 @@ import "./Hamburger.css"
 const Hamburger = ({ open, handler }) => {
   return (
     <button
-      onClick={() => handler()}
+      onClick={() => handler(!open)}
       className={`hamburger-button ${open && "open"}`}
     >
       <div className="hamburger-container">

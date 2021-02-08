@@ -154,6 +154,9 @@ export const ProductPageQuery = graphql`
           id
           currency
           unit_amount
+          metadata {
+            compareAt
+          }
         }
         name
       }

@@ -1,0 +1,161 @@
+<mjml>
+  <mj-head>
+    <mj-font
+      name="Damion"
+      href="https://fonts.googleapis.com/css?family=Damion"
+    ></mj-font>
+  </mj-head>
+  <mj-body>
+    <mj-section
+      text-align="left"
+      padding="20px"
+      border-bottom="1px solid rgba(0,0,0,0.7)"
+    >
+      <mj-column>
+        <mj-text
+          padding="0px"
+          font-family="Damion"
+          font-size="24px"
+          text-decoration="underline"
+          >TheCraftsmanJohn</mj-text
+        >
+      </mj-column>
+      <mj-column>
+        <mj-text font-family="Roboto" color="rgba(0,0,0,0.4)" align="right"
+          >{{charge.id}}</mj-text
+        >
+      </mj-column>
+    </mj-section>
+    <mj-section>
+      <mj-column>
+        <mj-text font-size="16px" color="#000000" font-family="Roboto"
+          >Thank you for your purchase! Your order is going to be crafted and
+          delivered soon.</mj-text
+        >
+      </mj-column>
+    </mj-section>
+    <mj-section>
+      <mj-column padding="0" width="90%">
+        <mj-table padding="0">
+          <tr style="text-align: left; padding: 15px 0">
+            <th style="padding: 0 15px 0 0">{{prod.name}}</th>
+          </tr>
+          <tr border-bottom="1px solid red">
+            <table width="100%">
+              <td border-bottom="1px solid red">
+                <img
+                  padding="0"
+                  width="50px"
+                  src="{{prod.price.product.images[0]}}"
+                />
+              </td>
+              <td float="right">
+                <table>
+                  <tr>
+                    <td
+                      style="
+                        padding: 0 15px 0 0;
+                        font-size: 14px;
+                        font-family: Roboto;
+                      "
+                    >
+                      leather:
+                      <div
+                        style="display:inline-block;width:14px;height:14px;background-color:{{prod.leather.color}};border-radius:4px;"
+                      ></div>
+                    </td>
+                    <td
+                      style="
+                        padding: 0 15px;
+                        font-size: 14px;
+                        font-family: Roboto;
+                        text-align: right;
+                      "
+                    >
+                      quantity:
+                    </td>
+                    <td
+                      style="
+                        padding: 0 0 0 15px;
+                        font-size: 14px;
+                        text-align: right;
+                        font-family: Roboto;
+                        text-align: right;
+                      "
+                    >
+                      price:
+                    </td>
+                  </tr>
+                  <tr>
+                    <td
+                      style="
+                        padding: 0 15px 0 0;
+                        font-size: 14px;
+                        font-family: Roboto;
+                      "
+                    >
+                      thread:
+                      <div
+                        style="display:inline-block;width:14px;height:14px;background-color:{{prod.thread.color}};border-radius:4px;"
+                      ></div>
+                    </td>
+                    <td
+                      style="
+                        padding: 0 15px;
+                        font-size: 14px;
+                        font-family: Roboto;
+                        text-align: right;
+                      "
+                    >
+                      {{prod.quantity}}
+                    </td>
+                    <td
+                      style="
+                        padding: 0 0 0 15px;
+                        font-size: 16px;
+                        font-weight: 500;
+                        font-family: Roboto;
+                        text-align: right;
+                      "
+                    >
+                      {{prod.unit_amount/100}} {{prod.currency}}
+                    </td>
+                  </tr>
+                </table>
+              </td>
+            </table>
+          </tr>
+        </mj-table>
+        <mj-text padding="15px 15px 0 0" align="right">total:</mj-text>
+        <mj-text
+          padding="0 15px"
+          align="right"
+          font-size="32px"
+          font-weight="600"
+          >{{charge.amount/100}} {{charge.currency}}</mj-text
+        >
+      </mj-column>
+    </mj-section>
+    <mj-section>
+      <mj-column>
+        <mj-text font-weight="600">Invoice details:</mj-text>
+        <mj-text padding="4px 35px">{{session_metadata.company_name}}</mj-text>
+        <mj-text padding="4px 35px">{{session_metadata.street}}</mj-text>
+        <mj-text padding="4px 35px">{{session_metadata.postal_code}}</mj-text>
+        <mj-text padding="4px 35px">{{session_metadata.city}}</mj-text>
+        <mj-text padding="4px 35px">{{session_metadata.tax_id}}</mj-text>
+      </mj-column>
+      <mj-column>
+        <mj-text font-weight="600">Shipping:</mj-text>
+        <mj-text padding="4px 35px">{{session_metadata.email}}</mj-text>
+        <mj-text padding="4px 35px">{{session_metadata.phone}}</mj-text>
+        <mj-text padding="4px 35px">{{charge.shipping.address.line1}}</mj-text>
+        <mj-text padding="4px 35px">{{charge.shipping.address.line2}}</mj-text>
+        <mj-text padding="4px 35px"
+          >{{charge.shipping.address.postal_code}}</mj-text
+        >
+        <mj-text padding="4px 35px">{{charge.shipping.address.city}}</mj-text>
+      </mj-column>
+    </mj-section>
+  </mj-body>
+</mjml>

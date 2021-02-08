@@ -2,21 +2,21 @@
   position: sticky;
   top: 0;
   width: 100%;
-  height: 4rem;
+  height: var(--header-height);
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 0 1rem;
-  background-color: #f1f1f1;
+  background-color: var(--main-bg);
   box-shadow: 0px 10px 20px 0px #e1e1e1;
-  z-index: 100;
+  z-index: 400;
 }
 
 .header-title {
   margin: 0;
   padding: 0;
   font-family: Damion, serif;
-  font-size: 1.5rem;
+  font-size: 1rem;
   text-decoration: underline;
   font-weight: 400;
 }

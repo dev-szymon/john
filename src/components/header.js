@@ -1,20 +1,24 @@
+import React, { useState } from "react"
 import { Link } from "gatsby"
 import PropTypes from "prop-types"
-import React from "react"
 import { useCart } from "../context/cartContext"
 import cartIcon from "../images/cart.svg"
 import "./header.css"
 import Hamburger from "./Hamburger/Hamburger"
+import { FlexRow } from "./flex"
+import Navigation from "./navigation/navigation"
 
 const Header = ({ siteTitle }) => {
+  const [isOpen, setIsOpen] = useState(false)
   const { items, currency } = useCart()
+
   return (
     <header className="header-container">
-      <Hamburger />
+      <Hamburger open={isOpen} handler={setIsOpen} />
       <h1 className="header-title">
         <Link to="/">{siteTitle}</Link>
       </h1>
-      <div style={{ display: "flex", alignItems: "center" }}>
+      <FlexRow align="center">
         <span>{currency}</span>
         <Link to="/cart">
           <div className="cart-icon">
@@ -24,7 +28,8 @@ const Header = ({ siteTitle }) => {
             )}
           </div>
         </Link>
-      </div>
+      </FlexRow>
+      <Navigation isOpen={isOpen} />
     </header>
   )
 }

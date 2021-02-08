@@ -1,11 +1,13 @@
 require("dotenv").config()
-const stripe = require("stripe")(process.env.STRIPE_SK)
-// const nodemailer = require("nodemailer")
-// const Handlebars = require("handlebars")
-// const fs = require("fs")
+const stripe = require("stripe")(process.env.GATSBY_STRIPE_SK)
+const nodemailer = require("nodemailer")
+const Handlebars = require("handlebars")
+const fs = require("fs")
 
 exports.handler = async ({ body, headers }) => {
-  const endpointSecret = process.env.STRIPE_WEBHOOK_SECRET
+  const endpointSecret = process.env.GATSBY_STRIPE_WEBHOOK_SECRET
+  console.log(endpointSecret)
+  console.log(process.env.GATSBY_STRIPE_SK)
 
   try {
     const stripeEvent = stripe.webhooks.constructEvent(
@@ -123,7 +125,7 @@ exports.handler = async ({ body, headers }) => {
 
     return {
       statusCode: 200,
-      body: { received: true },
+      body: JSON.stringify({ received: true }),
     }
   } catch (err) {
     console.log(err.message)
