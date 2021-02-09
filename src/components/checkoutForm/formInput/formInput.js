@@ -9,11 +9,13 @@ const ErrorText = ({ children }) => {
 
 const FormInput = ({ className, label, name, ...rest }) => {
   return (
-    <FlexColumn className={className}>
-      <label htmlFor={name}>{label}</label>
-      <Field id={name} name={name} {...rest} />
+    <>
+      <FlexColumn className={`${className} form-input`}>
+        <label htmlFor={name}>{label}</label>
+        <Field id={name} name={name} {...rest} />
+      </FlexColumn>
       <ErrorMessage name={name} component={ErrorText} />
-    </FlexColumn>
+    </>
   )
 }
 

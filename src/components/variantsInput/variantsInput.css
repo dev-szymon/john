@@ -20,7 +20,7 @@
 .color-option:after {
   width: 1.5rem;
   height: 1.5rem;
-  border-radius: 100%;
+  border-radius: 16px;
   position: absolute;
   cursor: pointer;
   background-color: inherit;
@@ -33,11 +33,11 @@
 .color-option:checked:after {
   width: 1.5rem;
   height: 1.5rem;
-  border-radius: 100%;
+  border-radius: 16px;
   position: absolute;
   background-color: inherit;
   content: "";
   display: block;
   visibility: visible;
-  box-shadow: 0px 0px 0px 3px black;
+  box-shadow: 0px 0px 0px 2px rgba(0, 0, 0);
 }

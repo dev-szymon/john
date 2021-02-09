@@ -32,24 +32,24 @@ const CartItem = ({ item }) => {
         <div className="cart-item__image">
           <Img fluid={product.gallery[0]} />
         </div>
-        <FlexColumn>
-          <FlexRow justify="space-between">
-            <span>leather</span>
+        <FlexColumn justify="space-around">
+          <FlexRow justify="space-between" align="flex-end">
+            <span className="secondary-label">leather</span>
             <div
               className="variant-color"
               style={{ backgroundColor: leather.color }}
             ></div>
           </FlexRow>
-          <FlexRow justify="space-between">
-            <span>thread</span>
+          <FlexRow justify="space-between" align="flex-end">
+            <span className="secondary-label">thread</span>
             <div
               className="variant-color"
               style={{ backgroundColor: thread.color }}
             ></div>
           </FlexRow>
         </FlexColumn>
-        <FlexColumn>
-          <span>quantity</span>
+        <FlexColumn align="flex-end" justify="space-around">
+          <span className="secondary-label">quantity</span>
           <input
             type="number"
             value={quantity}
@@ -67,7 +67,7 @@ const CartItem = ({ item }) => {
           ></input>
         </FlexColumn>
         <FlexColumn align="flex-end">
-          <span>total</span>
+          <span className="secondary-label">total</span>
           <span>
             {`${(price.unit_amount * Number(quantity)) / 100} ${
               price.currency

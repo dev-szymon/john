@@ -4,8 +4,11 @@ import SEO from "../../components/seo"
 import ProductCard from "../../components/productCard/productCard"
 import { graphql, Link } from "gatsby"
 import Img from "gatsby-image"
+import { useCart } from "../../context/cartContext"
+import { getMatchingCurrency } from "../../utils/index"
 
 const ProductsPage = ({ data }) => {
+  const { currency } = useCart()
   const { edges } = data.allMarkdownRemark
   return (
     <Layout>
@@ -14,26 +17,30 @@ const ProductsPage = ({ data }) => {
       <div className="product-grid">
         {edges.map(({ node }) => {
           const {
-            fields,
+            fields: { prices, name, slug },
             frontmatter: { gallery },
           } = node
 
-          const { compareAt } = fields.prices[0].metadata
+          const {
+            metadata: { compareAt },
+            unit_amount,
+          } = getMatchingCurrency(prices, currency)
+
           return (
-            <Link to={fields.slug} key={node.id}>
+            <Link to={slug} key={node.id}>
               <ProductCard>
                 <Img className="product-card_image" fluid={gallery[0]} />
                 <div className="product-card_details">
-                  <h4 className="product-card_name">{fields.name}</h4>
+                  <h4 className="product-card_name">{name}</h4>
                   <div className="product-card_price">
                     {compareAt && (
                       <span className="compare-price">{`${
                         Number(compareAt) / 100
-                      } ${fields.prices[0].currency}`}</span>
+                      } ${currency}`}</span>
                     )}
                     <span className="actual-price">{`${
-                      fields.prices[0].unit_amount / 100
-                    } ${fields.prices[0].currency}`}</span>
+                      unit_amount / 100
+                    } ${currency}`}</span>
                   </div>
                 </div>
               </ProductCard>

@@ -47,9 +47,9 @@ const CheckoutForm = () => {
       {needInvoice && (
         <>
           <FormInput name="company_name" label="company name" />
-          <FormInput name="street" label="street" />
+          <FormInput className="checkout-input" name="street" label="street" />
           <FormInput name="postal_code" label="postal code" />
-          <FormInput name="city" label="city" />
+          <FormInput className="checkout-input" name="city" label="city" />
           <FormInput name="tax_id" label="nip/tax id" />
         </>
       )}
