@@ -1,8 +1,18 @@
 import React from "react"
+import { Link } from "gatsby"
 import Layout from "../components/layout"
 import { useCart, useDispatchCart } from "../context/cartContext"
 import CartItem from "../components/cartItem/cartItem"
 import CheckoutForm from "../components/checkoutForm/checkoutForm"
+
+const EmptyCart = () => {
+  return (
+    <div className="empty-cart">
+      <p>Your cart is empty</p>
+      <Link to="/products">Browse available products!</Link>
+    </div>
+  )
+}
 
 const CartPage = () => {
   const { items } = useCart()
@@ -12,12 +22,12 @@ const CartPage = () => {
       <div
         style={{
           width: "80%",
-          maxWidth: "620px",
+          maxWidth: "480px",
           margin: "0 auto",
         }}
       >
         {items.length === 0 ? (
-          <div>Your cart is empty</div>
+          <EmptyCart />
         ) : (
           <>
             {items.map((item, index) => (

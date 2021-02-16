@@ -17,6 +17,7 @@
   margin: 0 auto;
 }
 .product-content_name {
+  font-family: Texturina;
   font-size: 1.5rem;
   margin-bottom: 1rem;
 }
@@ -32,6 +33,11 @@
 }
 
 @media (min-width: 1024px) {
+  .image-gallery {
+    position: sticky;
+    top: calc(var(--header-height) + 1rem);
+  }
+
   .product-section {
     flex-direction: row;
     align-items: flex-start;

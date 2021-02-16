@@ -9,6 +9,7 @@
   padding: 0 1rem;
   background-color: var(--main-bg);
   box-shadow: 0px 10px 20px 0px #e1e1e1;
+  color: var(--main-font-color);
   z-index: 400;
 }
 
@@ -22,7 +23,7 @@
 }
 
 .header-title > a {
-  color: black;
+  color: var(--main-font-color);
 }
 
 .cart-icon > img {
@@ -39,8 +40,8 @@
 }
 
 .cart-counter {
-  background-color: black;
-  color: #f6f6f6;
+  background-color: var(--main-font-color);
+  color: var(--main-bg);
   width: 1rem;
   height: 1rem;
   font-size: 0.5rem;
@@ -51,4 +52,10 @@
   position: absolute;
   right: -4px;
   top: 50%;
+}
+
+@media (min-width: 768px) {
+  .header-title {
+    font-size: 1.5rem;
+  }
 }

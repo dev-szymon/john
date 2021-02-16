@@ -24,7 +24,7 @@ const Header = ({ siteTitle }) => {
           <div className="cart-icon">
             <img src={cartIcon} alt="cart" />
             {items.length > 0 && (
-              <div className="cart-counter">{`${items.length}`}</div>
+              <div className={`cart-counter`}>{`${items.length}`}</div>
             )}
           </div>
         </Link>

@@ -1,40 +1,57 @@
+.home-section {
+  overflow: hidden;
+}
+.hero-section {
+  width: 100vw;
+  height: 100vh;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center right;
+  box-shadow: inset 10vw 35vh 30vw #000000, inset 30vw -35vh 25vw #000000,
+    inset -20vw -20vh 10vw #000000;
+}
+
+@media (max-width: 768px) {
+  .hero-section {
+    background-size: 230%;
+    background-position: 90% 40%;
+  }
+}
+
+.home-page_typography {
+  color: var(--main-bg);
+  position: relative;
+  top: 4rem;
+  margin: 0 auto;
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  z-index: 300;
+}
+
 .main-text {
-  font-family: Rhodium Libre;
-  text-align: center;
+  font-family: Texturina;
   font-size: 2rem;
   line-height: 130%;
   margin: 1.5rem 0;
 }
 
-.hero-image {
-  height: 60vh;
-}
-
 .secondary-text {
+  position: relative;
   font-family: Roboto;
-  text-align: center;
   width: 80%;
-  margin: 0 auto 2rem;
-}
-
-.home-page_typography {
-  margin: 0 auto;
-  width: 80%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  margin: 2rem 0;
 }
 
 .action-button {
   position: relative;
   max-width: 200px;
   text-align: center;
-  font-family: Rhodium Libre;
+  font-family: Roboto;
   font-size: 1.5rem;
   padding: 0.25rem 2.5rem;
   color: #f6f6f6;
-  background-color: #832b2b;
-
-  box-shadow: 0px 4px 20px 0px rgb(131, 43, 43, 0.5);
+  border: 1px solid #f6f6f6;
+  background-color: none;
   border-radius: 1rem;
 }

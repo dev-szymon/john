@@ -1,16 +1,18 @@
 import React from "react"
 import Img from "gatsby-image"
+import { Link } from "gatsby"
 import "./cartItem.css"
 import Hamburger from "../Hamburger/Hamburger"
 import { useDispatchCart, useCart } from "../../context/cartContext"
 import { FlexColumn, FlexRow } from "../flex"
 import { getMatchingCurrency } from "../../utils/index"
+import Counter from "../counter/counter"
 
 const CartItem = ({ item }) => {
   const {
     product,
     variant: { quantity, thread, leather },
-    fields: { prices, name },
+    fields: { prices, name, slug },
   } = item
 
   const { currency } = useCart()
@@ -25,7 +27,9 @@ const CartItem = ({ item }) => {
   return (
     <div className="cart-item">
       <FlexRow justify="space-between">
-        <h4>{name}</h4>
+        <Link to={slug}>
+          <h4>{name}</h4>
+        </Link>
         <Hamburger open={true} handler={() => removeItem(item)} />
       </FlexRow>
       <FlexRow justify="space-between">
@@ -50,23 +54,21 @@ const CartItem = ({ item }) => {
         </FlexColumn>
         <FlexColumn align="flex-end" justify="space-around">
           <span className="secondary-label">quantity</span>
-          <input
-            type="number"
-            value={quantity}
-            onChange={e =>
+          <Counter
+            counter={quantity}
+            setCounter={newValue =>
               dispatch({
                 type: "UPDATE",
                 previous: item,
                 updated: {
                   ...item,
-                  variant: { ...item.variant, quantity: e.target.value },
+                  variant: { ...item.variant, quantity: newValue },
                 },
               })
             }
-            style={{ width: "48px" }}
-          ></input>
+          />
         </FlexColumn>
-        <FlexColumn align="flex-end">
+        <FlexColumn align="flex-end" justify="space-around">
           <span className="secondary-label">total</span>
           <span>
             {`${(price.unit_amount * Number(quantity)) / 100} ${

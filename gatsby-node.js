@@ -151,8 +151,45 @@ exports.onCreateNode = async ({
 }
 
 exports.createResolvers = ({ createResolvers }) => {
+  const createFixedCloudinary = async (src, width, height) => {
+    const aspectRatio = width / height
+
+    const n = `/upload/c_fill,h_${height},w_${width}/v`
+    const r = /\/upload\/v/
+
+    const srcOutcome = src.replace(r, n)
+
+    const getBase64 = async url => {
+      const response = await fetch(url)
+      const buffer = await response.arrayBuffer()
+      const base64 = Buffer.from(buffer).toString("base64")
+      return `data:image/png;base64,${base64}`
+    }
+    const srcSetWidths = [240, 840, 1280, 1920]
+    const srcSet = (widths, cloudinaryUrl) => {
+      return widths
+        .map(w => {
+          const transformations = `/upload/c_fill,h_${Math.floor(
+            w / aspectRatio
+          )},w_${w}/v`
+          return `${cloudinaryUrl.replace(r, transformations)} ${w}w`
+        })
+        .join()
+    }
+
+    const base64 = await getBase64(src.replace(r, `/upload/w_30/v`))
+    return {
+      aspectRatio: aspectRatio,
+      base64: base64,
+      width: width,
+      height: height,
+      src: srcOutcome,
+      srcSet: srcSet(srcSetWidths, src),
+    }
+  }
+
   const createCloudinaryGalleryNode = async src => {
-    const aspectRatio = 1.5
+    const aspectRatio = 16 / 9
     const srcSetWidths = [160, 320, 640, 900]
     const r = /\/upload\/v/
     const srcSet = (widths, cloudinaryUrl) => {
@@ -196,7 +233,7 @@ exports.createResolvers = ({ createResolvers }) => {
           if (!source.featured_image) {
             return
           }
-          return createCloudinaryGalleryNode(source.featured_image)
+          return createFixedCloudinary(source.featured_image, 1920, 1080)
         },
       },
       gallery: {
@@ -221,14 +258,22 @@ exports.createSchemaCustomization = ({ actions }) => {
       frontmatter: Frontmatter
     }
     type Frontmatter {
-      gallery: [CloudinaryGalleryNode] 
-      featured_image: CloudinaryGalleryNode
+      gallery: [CloudinaryGalleryFluid] 
+      featured_image: CloudinaryGalleryFixed
     }
-    type CloudinaryGalleryNode {
+    type CloudinaryGalleryFluid {
       aspectRatio: Float!
       base64: String!
       sizes: String!
       src: String!
+      srcSet: String!
+    }
+    type CloudinaryGalleryFixed {
+      aspectRatio: Float!
+      base64: String!
+      height: Int!
+      src: String!
+      width: Int!
       srcSet: String!
     }
   `

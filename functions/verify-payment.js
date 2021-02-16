@@ -6,8 +6,6 @@ const fs = require("fs")
 
 exports.handler = async ({ body, headers }) => {
   const endpointSecret = process.env.GATSBY_STRIPE_WEBHOOK_SECRET
-  console.log(endpointSecret)
-  console.log(process.env.GATSBY_STRIPE_SK)
 
   try {
     const stripeEvent = stripe.webhooks.constructEvent(

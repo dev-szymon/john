@@ -1,4 +1,4 @@
-export const worldwide = [
+const worldwide = [
   "AC",
   "AD",
   "AE",
@@ -238,4 +238,6 @@ export const worldwide = [
   "ZZ",
 ]
 
-export const selection = ["PL", "DE", "US"]
+const selection = ["PL", "DE", "US"]
+
+module.exports = { selection, worldwide }

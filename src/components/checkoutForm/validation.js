@@ -1,28 +1,33 @@
 import * as yup from "yup"
 
-// yup.setLocale({
-//   // use constant translation keys for messages without values
-//   mixed: {
-//     required: ({ path }) => ({
-//       [path]: "The field is required",
-//     }),
-//   },
-//   // use functions to generate an error object that includes the value from the schema
-
-//   string: {
-//     email: ({ path }) => ({ [path]: "Provide valid email" }),
-//   },
-// })
-
 export const checkoutSchema = yup.object().shape({
-  email: yup.string().email("Provide valid email").required("Field required"),
-  phone: yup.string().required("Field required"),
-  invoice: yup.bool(),
-  company_name: yup.string().required("Field required"),
-  street: yup.string().required("Field required"),
-  postal_code: yup.string().required("Field required"),
-  tax_id: yup.string().required("Field required"),
+  email: yup
+    .string()
+    .email("Provide valid email address")
+    .required("Provide email address"),
+  phone: yup.string().required("Provide phone number"),
+  invoice: yup.boolean().required(""),
+  company_name: yup.string().when("invoice", {
+    is: true,
+    then: yup.string().required("Provide your company name"),
+  }),
+  street: yup.string().when("invoice", {
+    is: true,
+    then: yup.string().required("Provide street name"),
+  }),
+  city: yup.string().when("invoice", {
+    is: true,
+    then: yup.string().required("Provide postal code"),
+  }),
+  postal_code: yup.string().when("invoice", {
+    is: true,
+    then: yup.string().required("Provide postal code"),
+  }),
+  tax_id: yup.string().when("invoice", {
+    is: true,
+    then: yup.string().required("Provide your tax id/vat number"),
+  }),
   terms_n_conditions: yup
-    .bool()
+    .boolean()
     .isTrue("You need to accept Terms & Conditions"),
 })

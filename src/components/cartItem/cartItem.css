@@ -12,6 +12,10 @@
   overflow: hidden;
 }
 
+.cart-item .hamburger-button {
+  opacity: 0.6;
+}
+
 .variant-color {
   width: 1rem;
   height: 1rem;
@@ -26,8 +30,16 @@
 
 .cart-item input {
   background: none;
-  border: 1px solid rgba(0, 0, 0, 0.4);
+  border: 1px solid var(--main-font-opacity4);
   border-radius: 6px;
   padding: 0 0.5rem;
   text-align: right;
+}
+.empty-cart {
+  padding: 1rem;
+}
+
+.empty-cart a {
+  color: #3059e9;
+  text-decoration: underline;
 }

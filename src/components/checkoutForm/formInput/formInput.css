@@ -1,14 +1,16 @@
 .form-input {
+  width: 100%;
   position: relative;
-  border: 1px solid rgba(0, 0, 0, 0.6);
+  border: 1px solid var(--main-font-opacity6);
   border-radius: 0.5rem;
   margin-top: 1rem;
+  max-width: 400px;
 }
 
 .form-input label {
   position: absolute;
   top: 0.5rem;
-  color: rgba(0, 0, 0, 0.6);
+  color: var(--main-font-opacity6);
   background: none;
   padding: 0 0.5rem;
 }
@@ -23,6 +25,20 @@
   border: none;
 }
 
+.checkbox-field {
+  margin-top: 1rem;
+}
+
+.checkbox-field label {
+  margin-left: 0.5rem;
+}
+
 .error-text {
   color: red;
+  width: 100%;
+  max-width: 400px;
+}
+
+.to-left-label {
+  align-self: flex-start;
 }

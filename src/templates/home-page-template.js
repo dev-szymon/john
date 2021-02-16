@@ -1,7 +1,6 @@
 import React from "react"
 import { Link, graphql } from "gatsby"
 import Layout from "../components/layout"
-import Img from "gatsby-image"
 import "./home-page.css"
 
 export const HomePageTemplate = ({
@@ -10,14 +9,20 @@ export const HomePageTemplate = ({
   secondary_text,
 }) => {
   return (
-    <section>
-      <Img fluid={featured_image} className="hero-image" />
-      <div className="home-page_typography">
-        <h2 className="main-text">{main_text}</h2>
-        <p className="secondary-text">{secondary_text}</p>
-        <Link to="/products/" className="action-button">
-          shop now
-        </Link>
+    <section className="home-section">
+      <div
+        className="hero-section"
+        style={{
+          backgroundImage: `url(${featured_image.src})`,
+        }}
+      >
+        <div className="home-page_typography">
+          <h2 className="main-text">{main_text}</h2>
+          <p className="secondary-text">{secondary_text}</p>
+          <Link to="/products/" className="action-button">
+            shop now
+          </Link>
+        </div>
       </div>
     </section>
   )
@@ -48,9 +53,9 @@ export const LandingPageQuery = graphql`
       frontmatter {
         featured_image {
           src
-          srcSet
           base64
-          sizes
+          height
+          width
           aspectRatio
         }
         main_text

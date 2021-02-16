@@ -13,7 +13,13 @@ const reducer = (state, action) => {
       return { items: newArr, currency: state.currency }
     case "UPDATE":
       const updatedArr = [...state.items]
-      updatedArr.splice(state.items.indexOf(action.previous), 1, action.updated)
+      action.updated.variant.quantity > 0
+        ? updatedArr.splice(
+            state.items.indexOf(action.previous),
+            1,
+            action.updated
+          )
+        : updatedArr.splice(state.items.indexOf(action.previous), 1)
       return { items: updatedArr, currency: state.currency }
     case "CLEAR":
       return { items: [], currency: state.currency }

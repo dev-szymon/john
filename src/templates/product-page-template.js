@@ -1,12 +1,13 @@
 import React, { useReducer } from "react"
 import Layout from "../components/layout"
-import { graphql } from "gatsby"
+import { graphql, Link } from "gatsby"
 import ImageGallery from "../components/imageGallery/imageGallery"
 import "./product-page.css"
 import { useDispatchCart } from "../context/cartContext"
 import Content, { HTMLContent } from "../components/Content"
 import { createCartItem } from "../utils/index"
 import VariantsInput from "../components/variantsInput/variantsInput"
+import Counter from "../components/counter/counter"
 
 export const ProductPageTemplate = ({
   content,
@@ -86,6 +87,15 @@ const ProductPage = ({ data }) => {
 
   return (
     <Layout>
+      <div className="breadcrumbs">
+        <span>...</span>
+        <span>/</span>
+        <Link to="/products">products</Link>
+        <span>/</span>
+        <Link className="current" to={fields.slug}>
+          {fields.name}
+        </Link>
+      </div>
       <ProductPageTemplate
         content={html}
         contentComponent={HTMLContent}
@@ -105,17 +115,18 @@ const ProductPage = ({ data }) => {
             onChange={threadChange}
             label="thread"
           />
-          <input
-            type="number"
-            value={variantState.quantity}
-            onChange={e =>
+          <Counter
+            counter={variantState.quantity}
+            setCounter={newValue =>
+              // makes sure it's not changed to less than 1 on priduct page, in cart changing to 0 removes item
+              newValue > 0 &&
               dispatchVariant({
                 type: "SET_QUANTITY",
-                value: e.target.value,
+                value: newValue,
               })
             }
-            style={{ width: "48px" }}
-          ></input>
+          />
+
           <button onClick={() => addToCart()}>add to cart</button>
         </div>
       </ProductPageTemplate>
@@ -159,6 +170,7 @@ export const ProductPageQuery = graphql`
           }
         }
         name
+        slug
       }
     }
   }

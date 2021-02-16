@@ -6,6 +6,7 @@ import { graphql, Link } from "gatsby"
 import Img from "gatsby-image"
 import { useCart } from "../../context/cartContext"
 import { getMatchingCurrency } from "../../utils/index"
+import "./products.css"
 
 const ProductsPage = ({ data }) => {
   const { currency } = useCart()
@@ -13,7 +14,13 @@ const ProductsPage = ({ data }) => {
   return (
     <Layout>
       <SEO title="Page two" />
-      <div style={{ height: "2rem", width: "100%" }}></div>
+      <div className="breadcrumbs">
+        <span>...</span>
+        <span>/</span>
+        <Link className="current" to="/products">
+          products
+        </Link>
+      </div>
       <div className="product-grid">
         {edges.map(({ node }) => {
           const {

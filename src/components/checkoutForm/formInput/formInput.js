@@ -21,8 +21,8 @@ const FormInput = ({ className, label, name, ...rest }) => {
 
 export const Checkbox = ({ className, label, name, ...rest }) => {
   return (
-    <FlexColumn className={className}>
-      <FlexRow>
+    <FlexColumn className={`${className} checkbox-field`}>
+      <FlexRow align="center">
         <Field id={name} name={name} type="checkbox" {...rest} />
         <label htmlFor={name}>{label}</label>
       </FlexRow>
