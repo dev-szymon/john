@@ -32,10 +32,14 @@
   max-width: 640px;
 }
 
+.quantity-input span {
+  margin-right: 0.5rem;
+}
+
 @media (min-width: 1024px) {
   .image-gallery {
     position: sticky;
-    top: calc(var(--header-height) + 1rem);
+    top: calc(var(--lengthLg3) + 1rem);
   }
 
   .product-section {

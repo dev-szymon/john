@@ -1,14 +1,14 @@
 .navigation {
   position: absolute;
-  top: var(--header-height);
+  top: var(--lengthLg3);
   left: 0;
   overflow: hidden;
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: var(--main-bg);
+  background-color: var(--colorWhite);
   width: 100vw;
-  height: calc(100vh - var(--header-height));
+  height: calc(100vh - var(--lengthLg3));
   transform: translateX(-100%);
 }
 

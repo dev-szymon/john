@@ -1,12 +1,20 @@
 import React from "react"
 import { FlexRow } from "../flex"
+import "./counter.css"
 
 const Counter = ({ counter, setCounter }) => {
   return (
-    <FlexRow>
-      <button onClick={() => setCounter(counter - 1)}>-</button>
-      <div>{counter}</div>
-      <button onClick={() => setCounter(counter + 1)}>+</button>
+    <FlexRow align="center" className="counter">
+      <button
+        className="smRoundBtn"
+        onClick={() => counter > 1 && setCounter(counter - 1)}
+      >
+        -
+      </button>
+      <div className="counter-value">{counter}</div>
+      <button className="smRoundBtn" onClick={() => setCounter(counter + 1)}>
+        +
+      </button>
     </FlexRow>
   )
 }

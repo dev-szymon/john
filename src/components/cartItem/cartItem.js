@@ -32,7 +32,7 @@ const CartItem = ({ item }) => {
         </Link>
         <Hamburger open={true} handler={() => removeItem(item)} />
       </FlexRow>
-      <FlexRow justify="space-between">
+      <FlexRow justify="space-between" className="cart-item__row">
         <div className="cart-item__image">
           <Img fluid={product.gallery[0]} />
         </div>

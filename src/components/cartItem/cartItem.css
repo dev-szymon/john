@@ -5,15 +5,29 @@
   border-bottom: 1px solid #aaaaaa;
 }
 
+.cart-item__row {
+  height: var(--lengthLg3);
+}
+
 .cart-item__image {
   width: 20%;
-  max-width: 70px;
-  border-radius: 4px;
+  max-width: 100px;
   overflow: hidden;
+  align-self: center;
+}
+
+.cart-item__image img {
+  border-radius: 4px;
 }
 
 .cart-item .hamburger-button {
-  opacity: 0.6;
+  opacity: 0.8;
+}
+
+.cart-item .smRoundBtn {
+  width: var(--lengthMd2);
+  height: var(--lengthMd2);
+  font-size: var(--lengthSm3);
 }
 
 .variant-color {

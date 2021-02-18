@@ -17,9 +17,11 @@ export const HomePageTemplate = ({
         }}
       >
         <div className="home-page_typography">
-          <h2 className="main-text">{main_text}</h2>
-          <p className="secondary-text">{secondary_text}</p>
-          <Link to="/products/" className="action-button">
+          <div>
+            <h2 className="main-text">{main_text}</h2>
+            <p className="secondary-text">{secondary_text}</p>
+          </div>
+          <Link to="/products/" className="action-button whiteBtn">
             shop now
           </Link>
         </div>

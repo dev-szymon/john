@@ -8,6 +8,7 @@ import Content, { HTMLContent } from "../components/Content"
 import { createCartItem } from "../utils/index"
 import VariantsInput from "../components/variantsInput/variantsInput"
 import Counter from "../components/counter/counter"
+import { FlexRow } from "../components/flex"
 
 export const ProductPageTemplate = ({
   content,
@@ -115,19 +116,25 @@ const ProductPage = ({ data }) => {
             onChange={threadChange}
             label="thread"
           />
-          <Counter
-            counter={variantState.quantity}
-            setCounter={newValue =>
-              // makes sure it's not changed to less than 1 on priduct page, in cart changing to 0 removes item
-              newValue > 0 &&
-              dispatchVariant({
-                type: "SET_QUANTITY",
-                value: newValue,
-              })
-            }
-          />
+          <FlexRow align="center" className="quantity-input">
+            <span>quantity</span>
+            <Counter
+              counter={variantState.quantity}
+              setCounter={newValue =>
+                dispatchVariant({
+                  type: "SET_QUANTITY",
+                  value: newValue,
+                })
+              }
+            />
+          </FlexRow>
 
-          <button onClick={() => addToCart()}>add to cart</button>
+          <button
+            className="action-button blackBtn"
+            onClick={() => addToCart()}
+          >
+            add to cart
+          </button>
         </div>
       </ProductPageTemplate>
     </Layout>

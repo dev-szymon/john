@@ -14,7 +14,7 @@ const Navigation = ({ isOpen }) => {
           <Link to="/products">
             <li>{`Products`}</li>
           </Link>
-          <Link to="/about">
+          <Link to="/">
             <li>{`About & Contact`}</li>
           </Link>
         </ul>

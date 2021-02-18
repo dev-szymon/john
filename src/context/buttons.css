@@ -1,0 +1,40 @@
+.smRoundBtn {
+  border-radius: 50%;
+  width: var(--lengthLg1);
+  height: var(--lengthLg1);
+  border: 1px solid var(--colorGray);
+  font-size: var(--lengthMd1);
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.blackBtn {
+  border: 1px solid var(--colorBlack);
+  color: var(--colorBlack);
+}
+.grayBtn {
+  border: 1px solid var(--colorGray);
+  color: var(--colorGray);
+}
+
+.whiteBtn {
+  border: 1px solid var(--colorWhite);
+  color: var(--colorWhite);
+}
+
+.action-button {
+  margin: 2rem 0;
+  position: relative;
+  max-width: 200px;
+  text-align: center;
+  font-family: var(--baseFont);
+  font-size: 1.5rem;
+  padding: 0.25rem 2.5rem;
+  background-color: none;
+  border-radius: 1rem;
+  align-self: center;
+  cursor: pointer;
+}

@@ -33,7 +33,7 @@
   top: 50%;
   width: 100%;
   transform: translateY(-50%);
-  background-color: var(--main-font-color);
+  background-color: var(--colorBlack);
   height: 2px;
 }
 
@@ -44,7 +44,7 @@
   width: 100%;
   top: -5px;
   height: 2px;
-  background-color: var(--main-font-color);
+  background-color: var(--colorBlack);
 }
 .hamburger-bar::after {
   position: absolute;
@@ -53,7 +53,7 @@
   width: 100%;
   top: 5px;
   height: 2px;
-  background-color: var(--main-font-color);
+  background-color: var(--colorBlack);
 }
 
 .open.hamburger-bar {

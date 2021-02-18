@@ -34,7 +34,10 @@ const CartPage = () => {
               <CartItem item={item} key={`${index} cart item`} />
             ))}
             <CheckoutForm />
-            <button onClick={() => dispatch({ type: "CLEAR" })}>
+            <button
+              className="action-button grayBtn"
+              onClick={() => dispatch({ type: "CLEAR" })}
+            >
               clear cart
             </button>
           </>

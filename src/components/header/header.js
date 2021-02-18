@@ -1,12 +1,12 @@
 import React, { useState } from "react"
 import { Link } from "gatsby"
 import PropTypes from "prop-types"
-import { useCart } from "../context/cartContext"
-import cartIcon from "../images/cart.svg"
+import { useCart } from "../../context/cartContext"
+import cartIcon from "../../images/cart.svg"
 import "./header.css"
-import Hamburger from "./Hamburger/Hamburger"
-import { FlexRow } from "./flex"
-import Navigation from "./navigation/navigation"
+import Hamburger from "../Hamburger/Hamburger"
+import { FlexRow } from "../flex"
+import Navigation from "../navigation/navigation"
 
 const Header = ({ siteTitle }) => {
   const [isOpen, setIsOpen] = useState(false)

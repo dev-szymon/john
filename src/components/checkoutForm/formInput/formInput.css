@@ -1,7 +1,7 @@
 .form-input {
   width: 100%;
   position: relative;
-  border: 1px solid var(--main-font-opacity6);
+  border: 1px solid var(--colorGray);
   border-radius: 0.5rem;
   margin-top: 1rem;
   max-width: 400px;
@@ -10,7 +10,7 @@
 .form-input label {
   position: absolute;
   top: 0.5rem;
-  color: var(--main-font-opacity6);
+  color: var(--colorGray);
   background: none;
   padding: 0 0.5rem;
 }

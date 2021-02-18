@@ -72,7 +72,9 @@ const CheckoutForm = () => {
             name="terms_n_conditions"
             label={`Accept Terms & Conditions`}
           />
-          <button type="submit">checkout</button>
+          <button className="action-button blackBtn" type="submit">
+            checkout
+          </button>
         </div>
       </Form>
     </Formik>

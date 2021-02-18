@@ -4,11 +4,22 @@
 @import url("https://fonts.googleapis.com/css?family=Texturina&display=swap");
 
 :root {
-  --header-height: 4rem;
-  --main-bg: #f1f1f1;
-  --main-font-color: #black;
-  --main-font-opacity6: rgba(0, 0, 0, 0.6);
-  --main-font-opacity4: rgba(0, 0, 0, 0.4);
+  --colorWhite: #f2f5f5;
+  --colorBlack: #0f0f0f;
+  --colorGray: #908e9b;
+  --colorDisabled: #e1dfe9;
+  --lengthSm1: 0.25rem;
+  --lengthSm2: 0.5rem;
+  --lengthSm3: 0.75rem;
+  --lengthMd1: 1rem;
+  --lengthMd2: 1.25rem;
+  --lengthMd3: 1.5rem;
+  --lengthLg1: 2rem;
+  --lengthLg2: 3rem;
+  --lengthLg3: 4rem;
+  --baseFont: -apple-system, BlinkMacSystemFont, Roboto, Oxygen, Ubuntu,
+    Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  --headerFont: Texturina, Georgia, "Times New Roman", Times, serif;
 }
 
 * {
@@ -18,8 +29,7 @@
 }
 
 body {
-  font-family: -apple-system, BlinkMacSystemFont, Roboto, Oxygen, Ubuntu,
-    Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  font-family: var(--baseFont);
 }
 
 a {
@@ -32,5 +42,5 @@ img {
 }
 
 body {
-  background-color: var(--main-bg);
+  background-color: var(--colorWhite);
 }
