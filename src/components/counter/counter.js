@@ -8,11 +8,16 @@ const Counter = ({ counter, setCounter }) => {
       <button
         className="smRoundBtn"
         onClick={() => counter > 1 && setCounter(counter - 1)}
+        disabled={counter === 1}
       >
         -
       </button>
       <div className="counter-value">{counter}</div>
-      <button className="smRoundBtn" onClick={() => setCounter(counter + 1)}>
+      <button
+        className="smRoundBtn"
+        disabled={counter === 9}
+        onClick={() => setCounter(counter + 1)}
+      >
         +
       </button>
     </FlexRow>

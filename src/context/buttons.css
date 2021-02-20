@@ -2,7 +2,7 @@
   border-radius: 50%;
   width: var(--lengthLg1);
   height: var(--lengthLg1);
-  border: 1px solid var(--colorGray);
+  border: 1px solid var(--colorBlack);
   font-size: var(--lengthMd1);
   text-align: center;
   display: flex;
@@ -11,9 +11,14 @@
   cursor: pointer;
 }
 
+.smRoundBtn:disabled {
+  border-color: var(--colorGray);
+}
+
 .blackBtn {
   border: 1px solid var(--colorBlack);
   color: var(--colorBlack);
+  box-shadow: 0 4px 8px 0px rgba(0, 0, 0, 0.4);
 }
 .grayBtn {
   border: 1px solid var(--colorGray);
@@ -23,6 +28,7 @@
 .whiteBtn {
   border: 1px solid var(--colorWhite);
   color: var(--colorWhite);
+  box-shadow: 0 4px 8px 0px rgba(255, 255, 255, 0.4);
 }
 
 .action-button {
@@ -37,4 +43,8 @@
   border-radius: 1rem;
   align-self: center;
   cursor: pointer;
+}
+
+.action-button:disabled {
+  cursor: not-allowed;
 }

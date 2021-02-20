@@ -7,6 +7,7 @@ import Img from "gatsby-image"
 import { useCart } from "../../context/cartContext"
 import { getMatchingCurrency } from "../../utils/index"
 import "./products.css"
+import PriceDisplay from "../../components/priceDisplay/priceDisplay"
 
 const ProductsPage = ({ data }) => {
   const { currency } = useCart()
@@ -15,7 +16,7 @@ const ProductsPage = ({ data }) => {
     <Layout>
       <SEO title="Page two" />
       <div className="breadcrumbs">
-        <span>...</span>
+        <Link to="/">home</Link>
         <span>/</span>
         <Link className="current" to="/products">
           products
@@ -39,16 +40,11 @@ const ProductsPage = ({ data }) => {
                 <Img className="product-card_image" fluid={gallery[0]} />
                 <div className="product-card_details">
                   <h4 className="product-card_name">{name}</h4>
-                  <div className="product-card_price">
-                    {compareAt && (
-                      <span className="compare-price">{`${
-                        Number(compareAt) / 100
-                      } ${currency}`}</span>
-                    )}
-                    <span className="actual-price">{`${
-                      unit_amount / 100
-                    } ${currency}`}</span>
-                  </div>
+                  <PriceDisplay
+                    compareAt={compareAt}
+                    unit_amount={unit_amount}
+                    currency={currency}
+                  />
                 </div>
               </ProductCard>
             </Link>

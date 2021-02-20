@@ -15,6 +15,7 @@ const ImageGallery = ({ gallery }) => {
       <div className="image-list">
         {gallery.map((image, index) => (
           <div
+            role="img"
             className="image-list_item"
             key={`${isGatsbyImg ? image.src : image} ${index}`}
             onClick={() => setCurrentIndex(index)}

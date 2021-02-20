@@ -3,19 +3,20 @@ import Layout from "../components/layout"
 import { graphql, Link } from "gatsby"
 import ImageGallery from "../components/imageGallery/imageGallery"
 import "./product-page.css"
-import { useDispatchCart } from "../context/cartContext"
+import { useDispatchCart, useCart } from "../context/cartContext"
 import Content, { HTMLContent } from "../components/Content"
 import { createCartItem } from "../utils/index"
 import VariantsInput from "../components/variantsInput/variantsInput"
 import Counter from "../components/counter/counter"
 import { FlexRow } from "../components/flex"
+import PriceDisplay from "../components/priceDisplay/priceDisplay"
+import { getMatchingCurrency } from "../utils/index"
 
 export const ProductPageTemplate = ({
   content,
   contentComponent,
   gallery,
   name,
-  prices,
   children,
 }) => {
   const PostContent = contentComponent || Content
@@ -28,9 +29,6 @@ export const ProductPageTemplate = ({
         <div className="product-content_container">
           <h2 className="product-content_name">{name}</h2>
           <div>
-            <span className="price-tag">{`${prices[0].unit_amount / 100} ${
-              prices[0].currency
-            }`}</span>
             {children}
             <PostContent content={content} className="content" />
           </div>
@@ -72,6 +70,7 @@ const ProductPage = ({ data }) => {
   })
 
   const cartDispatch = useDispatchCart()
+  const { currency } = useCart()
 
   const addToCart = () => {
     return cartDispatch({
@@ -86,10 +85,14 @@ const ProductPage = ({ data }) => {
   const threadChange = option =>
     dispatchVariant({ type: "SET_THREAD", value: option })
 
+  const {
+    metadata: { compareAt },
+    unit_amount,
+  } = getMatchingCurrency(fields.prices, currency)
   return (
     <Layout>
       <div className="breadcrumbs">
-        <span>...</span>
+        <Link to="/">home</Link>
         <span>/</span>
         <Link to="/products">products</Link>
         <span>/</span>
@@ -106,6 +109,11 @@ const ProductPage = ({ data }) => {
         prod_id={frontmatter.prod_id}
       >
         <div>
+          <PriceDisplay
+            compareAt={compareAt}
+            unit_amount={unit_amount}
+            currency={currency}
+          />
           <VariantsInput
             variants={frontmatter.leather_color}
             onChange={leatherChange}
