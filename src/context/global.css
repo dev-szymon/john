@@ -8,6 +8,7 @@
   --colorBlack: #0f0f0f;
   --colorGray: #908e9b;
   --colorDisabled: #e1dfe9;
+  --colorOutline: #6080f4;
   --lengthSm1: 0.25rem;
   --lengthSm2: 0.5rem;
   --lengthSm3: 0.75rem;
@@ -26,6 +27,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  outline-color: var(--colorOutline);
 }
 
 body {

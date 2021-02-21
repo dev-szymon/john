@@ -26,16 +26,17 @@ const CartItem = ({ item }) => {
 
   return (
     <div className="cart-item">
-      <FlexRow justify="space-between">
+      <FlexRow justify="space-between" className="cart-item_top">
         <Link to={slug}>
           <h4>{name}</h4>
         </Link>
         <Hamburger open={true} handler={() => removeItem(item)} />
       </FlexRow>
-      <FlexRow justify="space-between" className="cart-item__row">
+      <FlexRow className="cart-item__row">
         <div className="cart-item__image">
           <Img fluid={product.gallery[0]} />
         </div>
+
         <FlexColumn justify="space-around">
           <FlexRow justify="space-between" align="flex-end">
             <span className="secondary-label">leather</span>
@@ -68,7 +69,12 @@ const CartItem = ({ item }) => {
             }
           />
         </FlexColumn>
-        <FlexColumn align="flex-end" justify="space-around">
+
+        <FlexColumn
+          align="flex-end"
+          justify="space-around"
+          className="cart-item_price"
+        >
           <span className="secondary-label">total</span>
           <span>
             {`${(price.unit_amount * Number(quantity)) / 100} ${

@@ -1,6 +1,6 @@
 import React from "react"
 
-const FlexColumn = ({ justify, align, children, className, ...rest }) => {
+const FlexColumn = ({ justify, align, children, className, gap, ...rest }) => {
   return (
     <div
       className={className}
@@ -9,6 +9,7 @@ const FlexColumn = ({ justify, align, children, className, ...rest }) => {
         flexDirection: "column",
         justifyContent: justify,
         alignItems: align,
+        gap: gap,
       }}
       {...rest}
     >
@@ -17,7 +18,7 @@ const FlexColumn = ({ justify, align, children, className, ...rest }) => {
   )
 }
 
-const FlexRow = ({ justify, align, children, className, ...rest }) => {
+const FlexRow = ({ justify, align, children, className, gap, ...rest }) => {
   return (
     <div
       className={className}
@@ -26,6 +27,7 @@ const FlexRow = ({ justify, align, children, className, ...rest }) => {
         flexDirection: "row",
         justifyContent: justify,
         alignItems: align,
+        gap: gap,
       }}
       {...rest}
     >

@@ -5,8 +5,20 @@
   border-bottom: 1px solid #aaaaaa;
 }
 
+.cart-item_top h4 {
+  font-size: var(--lengthMd1);
+  margin: 0;
+}
+
+.cart-item_top a {
+  display: flex;
+  align-items: center;
+}
+
 .cart-item__row {
   height: var(--lengthLg3);
+  width: 100%;
+  gap: var(--lengthMd2);
 }
 
 .cart-item__image {
@@ -56,4 +68,8 @@
 .empty-cart a {
   color: #3059e9;
   text-decoration: underline;
+}
+
+.cart-item_price {
+  margin-left: auto;
 }

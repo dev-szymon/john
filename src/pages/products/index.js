@@ -16,6 +16,8 @@ const ProductsPage = ({ data }) => {
     <Layout>
       <SEO title="Page two" />
       <div className="breadcrumbs">
+        <span>...</span>
+        <span>/</span>
         <Link to="/">home</Link>
         <span>/</span>
         <Link className="current" to="/products">
@@ -42,7 +44,7 @@ const ProductsPage = ({ data }) => {
                   <h4 className="product-card_name">{name}</h4>
                   <PriceDisplay
                     compareAt={compareAt}
-                    unit_amount={unit_amount}
+                    amount={unit_amount}
                     currency={currency}
                   />
                 </div>

@@ -92,6 +92,8 @@ const ProductPage = ({ data }) => {
   return (
     <Layout>
       <div className="breadcrumbs">
+        <span>...</span>
+        <span>/</span>
         <Link to="/">home</Link>
         <span>/</span>
         <Link to="/products">products</Link>
@@ -111,7 +113,7 @@ const ProductPage = ({ data }) => {
         <div>
           <PriceDisplay
             compareAt={compareAt}
-            unit_amount={unit_amount}
+            amount={unit_amount}
             currency={currency}
           />
           <VariantsInput

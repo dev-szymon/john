@@ -3,7 +3,10 @@ const path = require("path")
 const { clean } = require("diacritic")
 const _ = require("lodash")
 const md5 = require("md5")
-const fetch = require("isomorphic-fetch")
+const {
+  createFixedCloudinaryNode,
+  createFluidCloudinaryNode,
+} = require("./src/utils/index")
 
 const stripe = require("stripe")(process.env.GATSBY_STRIPE_SK)
 
@@ -73,17 +76,11 @@ exports.createPages = async ({ graphql, actions }) => {
   })
 }
 
-exports.onCreateNode = async ({
-  node,
-  actions,
-  getNode,
-  cache,
-  store,
-  createNodeId,
-}) => {
-  const { createNodeField, createNode } = actions
+exports.onCreateNode = async ({ node, actions, getNode }) => {
+  const { createNodeField } = actions
 
   if (
+    // if it is not a product md then create slug from it's path
     node.internal.type === `MarkdownRemark` &&
     node.frontmatter.template !== "product"
   ) {
@@ -96,29 +93,23 @@ exports.onCreateNode = async ({
   }
 
   if (node.frontmatter && node.frontmatter.template === "product") {
-    const {
-      prod_id,
-      category,
-      leather_color,
-      thread_color,
-      gallery,
-    } = node.frontmatter
+    const { prod_id, category, leather_color, thread_color } = node.frontmatter
 
     const product = await stripe.products.retrieve(prod_id)
 
     // if there are changes to metadata in frontmatter, update stripe products
 
-    const metadataObject = JSON.stringify({
+    const productMetadata = JSON.stringify({
       leather_color: leather_color,
       thread_color: thread_color,
       category: category,
     })
-    const md5hash = md5(metadataObject)
+    const md5hash = md5(productMetadata)
 
     if (md5hash !== product.metadata.md5hash) {
       await stripe.products.update(prod_id, {
         metadata: {
-          data: metadataObject,
+          data: productMetadata,
           md5hash: md5hash,
         },
       })
@@ -151,81 +142,6 @@ exports.onCreateNode = async ({
 }
 
 exports.createResolvers = ({ createResolvers }) => {
-  const createFixedCloudinary = async (src, width, height) => {
-    const aspectRatio = width / height
-
-    const n = `/upload/c_fill,h_${height},w_${width}/v`
-    const r = /\/upload\/v/
-
-    const srcOutcome = src.replace(r, n)
-
-    const getBase64 = async url => {
-      const response = await fetch(url)
-      const buffer = await response.arrayBuffer()
-      const base64 = Buffer.from(buffer).toString("base64")
-      return `data:image/png;base64,${base64}`
-    }
-    const srcSetWidths = [240, 840, 1280, 1920]
-    const srcSet = (widths, cloudinaryUrl) => {
-      return widths
-        .map(w => {
-          const transformations = `/upload/c_fill,h_${Math.floor(
-            w / aspectRatio
-          )},w_${w}/v`
-          return `${cloudinaryUrl.replace(r, transformations)} ${w}w`
-        })
-        .join()
-    }
-
-    const base64 = await getBase64(src.replace(r, `/upload/w_30/v`))
-    return {
-      aspectRatio: aspectRatio,
-      base64: base64,
-      width: width,
-      height: height,
-      src: srcOutcome,
-      srcSet: srcSet(srcSetWidths, src),
-    }
-  }
-
-  const createCloudinaryGalleryNode = async src => {
-    const aspectRatio = 16 / 9
-    const srcSetWidths = [160, 320, 640, 900]
-    const r = /\/upload\/v/
-    const srcSet = (widths, cloudinaryUrl) => {
-      return widths
-        .map(w => {
-          const transformations = `/upload/c_fill,h_${Math.floor(
-            w / aspectRatio
-          )},w_${w}/v`
-          return `${cloudinaryUrl.replace(r, transformations)} ${w}w`
-        })
-        .join()
-    }
-
-    // todo make it detect the extension
-
-    const getBase64 = async url => {
-      const response = await fetch(url)
-      const buffer = await response.arrayBuffer()
-      const base64 = Buffer.from(buffer).toString("base64")
-      return `data:image/jpeg;base64,${base64}`
-    }
-
-    const base64 = await getBase64(src.replace(r, `/upload/w_30/v`))
-    const n = `/upload/c_fill,h_600,w_900/v`
-
-    const ratioAdjusted = src.replace(r, n)
-
-    return {
-      aspectRatio,
-      base64: base64,
-      sizes: "(max-width: 900px) 100vw, 900px",
-      src: ratioAdjusted,
-      srcSet: srcSet(srcSetWidths, src),
-    }
-  }
-
   const resolvers = {
     Frontmatter: {
       featured_image: {
@@ -233,7 +149,7 @@ exports.createResolvers = ({ createResolvers }) => {
           if (!source.featured_image) {
             return
           }
-          return createFixedCloudinary(source.featured_image, 1920, 1080)
+          return createFixedCloudinaryNode(source.featured_image, 1920, 1080)
         },
       },
       gallery: {
@@ -242,7 +158,7 @@ exports.createResolvers = ({ createResolvers }) => {
             return
           }
 
-          return source.gallery.map(src => createCloudinaryGalleryNode(src))
+          return source.gallery.map(src => createFluidCloudinaryNode(src))
         },
       },
     },
@@ -258,17 +174,17 @@ exports.createSchemaCustomization = ({ actions }) => {
       frontmatter: Frontmatter
     }
     type Frontmatter {
-      gallery: [CloudinaryGalleryFluid] 
-      featured_image: CloudinaryGalleryFixed
+      gallery: [FluidCloudinaryNode] 
+      featured_image: FixedCloudinaryNode
     }
-    type CloudinaryGalleryFluid {
+    type FluidCloudinaryNode {
       aspectRatio: Float!
       base64: String!
       sizes: String!
       src: String!
       srcSet: String!
     }
-    type CloudinaryGalleryFixed {
+    type FixedCloudinaryNode {
       aspectRatio: Float!
       base64: String!
       height: Int!

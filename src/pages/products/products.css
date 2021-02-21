@@ -3,10 +3,10 @@
   padding: 1rem;
   display: grid;
   grid-gap: 1rem;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
   align-items: start;
   justify-items: center;
-  grid-template-rows: repeat(auto-fill, auto);
+  grid-template-rows: repeat(auto-fill, minmax(250px, max-content));
 }
 
 .product-grid > a {
@@ -26,4 +26,10 @@
 
 .breadcrumbs > .current {
   font-weight: 600;
+}
+
+@media (min-width: 768px) {
+  .product-grid {
+    width: 90%;
+  }
 }

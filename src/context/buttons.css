@@ -45,6 +45,13 @@
   cursor: pointer;
 }
 
+.medium-button {
+  font-size: var(--lengthMd1);
+  padding: calc(var(--lengthSm1)) var(--lengthSm3);
+  border-radius: var(--lengthMd1);
+  cursor: pointer;
+}
+
 .action-button:disabled {
   cursor: not-allowed;
 }

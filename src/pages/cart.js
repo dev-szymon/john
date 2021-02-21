@@ -3,7 +3,10 @@ import { Link } from "gatsby"
 import Layout from "../components/layout"
 import { useCart, useDispatchCart } from "../context/cartContext"
 import CartItem from "../components/cartItem/cartItem"
+import { FlexRow } from "../components/flex"
 import CheckoutForm from "../components/checkoutForm/checkoutForm"
+import PriceDisplay from "../components/priceDisplay/priceDisplay"
+import { getMatchingCurrency } from "../utils/index"
 
 const EmptyCart = () => {
   return (
@@ -15,8 +18,16 @@ const EmptyCart = () => {
 }
 
 const CartPage = () => {
-  const { items } = useCart()
+  const { items, currency } = useCart()
   const dispatch = useDispatchCart()
+  const total = items.reduce((acc, curr) => {
+    const {
+      fields: { prices },
+    } = curr
+
+    const price = getMatchingCurrency(prices, currency)
+    return acc + price.unit_amount
+  }, 0)
   return (
     <Layout>
       <div
@@ -33,13 +44,25 @@ const CartPage = () => {
             {items.map((item, index) => (
               <CartItem item={item} key={`${index} cart item`} />
             ))}
-            <CheckoutForm />
+            <div style={{ borderTop: "1px solid var(--colorBlack" }}>
+              <FlexRow align="flex-end" justify="flex-end" gap="0.5rem">
+                <p
+                  style={{
+                    margin: "0",
+                  }}
+                >
+                  Your order total:
+                </p>
+                <PriceDisplay amount={total} currency={currency} />
+              </FlexRow>
+            </div>
             <button
-              className="action-button grayBtn"
+              className="medium-button grayBtn"
               onClick={() => dispatch({ type: "CLEAR" })}
             >
               clear cart
             </button>
+            <CheckoutForm />
           </>
         )}
       </div>

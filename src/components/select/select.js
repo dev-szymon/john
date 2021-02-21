@@ -7,7 +7,11 @@ const Select = ({ options, name, onChange, currentValue }) => {
         name={name}
         onChange={e => onChange(e)}
         value={currentValue}
-        style={{ backgroundColor: "var(--colorWhite)", border: "none" }}
+        style={{
+          backgroundColor: "var(--colorWhite)",
+          border: "none",
+          cursor: "pointer",
+        }}
       >
         {options.map(({ optionLabel, optionValue }) => (
           <option value={optionValue}>{optionLabel}</option>
