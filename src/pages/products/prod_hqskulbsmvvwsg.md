@@ -1,6 +1,8 @@
 ---
 template: product
-prod_id: prod_HqskuLbsMvvwsg
+prod_id:
+  id: prod_HqskuLbsMvvwsg
+  name: Leather card holder
 category:
   - pattern
 gallery:
