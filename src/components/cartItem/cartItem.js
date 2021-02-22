@@ -38,7 +38,11 @@ const CartItem = ({ item }) => {
         </div>
 
         <FlexColumn justify="space-around">
-          <FlexRow justify="space-between" align="flex-end">
+          <FlexRow
+            justify="space-between"
+            align="flex-end"
+            className="column-margin"
+          >
             <span className="secondary-label">leather</span>
             <div
               className="variant-color"
@@ -53,7 +57,11 @@ const CartItem = ({ item }) => {
             ></div>
           </FlexRow>
         </FlexColumn>
-        <FlexColumn align="flex-end" justify="space-around">
+        <FlexColumn
+          align="flex-end"
+          justify="space-around"
+          className="column-margin"
+        >
           <span className="secondary-label">quantity</span>
           <Counter
             counter={quantity}

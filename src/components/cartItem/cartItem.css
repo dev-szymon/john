@@ -18,7 +18,10 @@
 .cart-item__row {
   height: var(--lengthLg3);
   width: 100%;
-  gap: var(--lengthMd2);
+}
+
+.column-margin {
+  margin-left: var(--lengthMd2);
 }
 
 .cart-item__image {

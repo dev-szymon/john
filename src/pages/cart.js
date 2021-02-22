@@ -45,10 +45,11 @@ const CartPage = () => {
               <CartItem item={item} key={`${index} cart item`} />
             ))}
             <div style={{ borderTop: "1px solid var(--colorBlack" }}>
-              <FlexRow align="flex-end" justify="flex-end" gap="0.5rem">
+              <FlexRow align="flex-end" justify="flex-end">
                 <p
                   style={{
                     margin: "0",
+                    marginRight: "0.5rem",
                   }}
                 >
                   Your order total:
