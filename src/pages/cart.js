@@ -58,6 +58,7 @@ const CartPage = () => {
               </FlexRow>
             </div>
             <button
+              style={{ margin: "1rem 0", float: "right" }}
               className="medium-button grayBtn"
               onClick={() => dispatch({ type: "CLEAR" })}
             >

@@ -72,7 +72,11 @@ const CheckoutForm = () => {
             name="terms_n_conditions"
             label={`Accept Terms & Conditions`}
           />
-          <button className="action-button blackBtn" type="submit">
+          <button
+            className="action-button blackBtn"
+            type="submit"
+            style={{ alignSelf: "flex-end" }}
+          >
             checkout
           </button>
         </div>

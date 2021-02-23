@@ -19,7 +19,7 @@ const Navigation = ({ isOpen }) => {
           </Link>
         </ul>
       </nav>
-      <div style={{ width: "200px" }}>
+      <div className="social-icons">
         <img src={etsy} alt="etsy"></img>
       </div>
     </div>

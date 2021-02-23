@@ -37,12 +37,8 @@ const CartItem = ({ item }) => {
           <Img fluid={product.gallery[0]} />
         </div>
 
-        <FlexColumn justify="space-around">
-          <FlexRow
-            justify="space-between"
-            align="flex-end"
-            className="column-margin"
-          >
+        <FlexColumn justify="space-around" className="column-margin">
+          <FlexRow justify="space-between" align="flex-end">
             <span className="secondary-label">leather</span>
             <div
               className="variant-color"

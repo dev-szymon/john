@@ -1,6 +1,5 @@
 import React, { useState } from "react"
 import { Link } from "gatsby"
-import PropTypes from "prop-types"
 import { useCart } from "../../context/cartContext"
 import cartIcon from "../../images/cart.svg"
 import "./header.css"
@@ -10,7 +9,7 @@ import Navigation from "../navigation/navigation"
 import Select from "../select/select"
 import { useDispatchCart } from "../../context/cartContext"
 
-const Header = ({ siteTitle }) => {
+const Header = () => {
   const [isOpen, setIsOpen] = useState(false)
   const { items, currency } = useCart()
   const dispatch = useDispatchCart()
@@ -20,10 +19,16 @@ const Header = ({ siteTitle }) => {
   }
   return (
     <header className="header-container">
-      <Hamburger open={isOpen} handler={setIsOpen} />
+      <Hamburger
+        open={isOpen}
+        handler={setIsOpen}
+        className="header-hamburger"
+      />
       <h1 className="header-title">
-        <Link to="/">{siteTitle}</Link>
+        <Link to="/">TheCraftsmanJohn</Link>
       </h1>
+      <Navigation isOpen={isOpen} />
+
       <FlexRow align="center">
         <Select
           onChange={handleChange}
@@ -42,17 +47,8 @@ const Header = ({ siteTitle }) => {
           </div>
         </Link>
       </FlexRow>
-      <Navigation isOpen={isOpen} />
     </header>
   )
-}
-
-Header.propTypes = {
-  siteTitle: PropTypes.string,
-}
-
-Header.defaultProps = {
-  siteTitle: ``,
 }
 
 export default Header

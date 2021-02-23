@@ -4,6 +4,7 @@
   left: 0;
   overflow: hidden;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   background-color: var(--colorWhite);
@@ -24,4 +25,27 @@
 
 .navigation li {
   margin: 2rem 0;
+}
+
+.social-icons img {
+  width: 50px;
+}
+
+@media (min-width: 768px) {
+  .navigation {
+    position: relative;
+    transform: translateX(0);
+    flex-direction: row;
+    width: 100%;
+    height: 100%;
+    top: 0;
+  }
+
+  .navigation ul {
+    display: flex;
+  }
+
+  .navigation li {
+    margin: 0 1rem;
+  }
 }

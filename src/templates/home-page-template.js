@@ -37,7 +37,7 @@ const HomePage = ({ data }) => {
     secondary_text,
   } = data.markdownRemark.frontmatter
   return (
-    <Layout>
+    <Layout dark={true}>
       <HomePageTemplate
         featured_image={featured_image}
         main_text={main_text}

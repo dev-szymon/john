@@ -14,7 +14,9 @@ const Select = ({ options, name, onChange, currentValue }) => {
         }}
       >
         {options.map(({ optionLabel, optionValue }) => (
-          <option value={optionValue}>{optionLabel}</option>
+          <option key={optionValue} value={optionValue}>
+            {optionLabel}
+          </option>
         ))}
       </select>
     </div>
