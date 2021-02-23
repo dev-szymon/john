@@ -1,7 +1,8 @@
 const fs = require("fs")
 fs.writeFileSync(
   "./.env",
-  `GATSBY_STRIPE_SK=${process.env.STRIPE_SK}\n
+  `GATSBY_STRIPE_SK=${process.env.GATSBY_STRIPE_SK}\n
+  GATSBY_STRIPE_PK=${process.env.GATSBY_STRIPE_PK}\n
   STRIPE_WEBHOOK_SECRET=${process.env.STRIPE_WEBHOOK_SECRET}\n
   GMAIL_USER=${process.env.GMAIL_USER}\n
   GMAIL_PASS=${process.env.GMAIL_PASS}\n
