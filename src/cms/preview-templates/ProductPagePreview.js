@@ -17,7 +17,7 @@ const ProductPagePreview = ({ entry, widgetFor }) => {
         headers: {
           Accept: "application/json",
           "Content-Type": "application/json",
-          Authorization: `Bearer ${process.env.GATSBY_STRIPE_SK}`,
+          Authorization: `Bearer ${process.env.STRIPE_SK}`,
         },
       })
         .then(res => res.json())
@@ -28,7 +28,7 @@ const ProductPagePreview = ({ entry, widgetFor }) => {
         headers: {
           Accept: "application/json",
           "Content-Type": "application/json",
-          Authorization: `Bearer ${process.env.GATSBY_STRIPE_SK}`,
+          Authorization: `Bearer ${process.env.STRIPE_SK}`,
         },
       })
         .then(res => res.json())

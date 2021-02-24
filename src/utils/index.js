@@ -7,7 +7,7 @@ const getProductPrices = async id => {
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
-        Authorization: `Bearer ${process.env.GATSBY_STRIPE_SK}`,
+        Authorization: `Bearer ${process.env.STRIPE_SK}`,
       },
     }
   )
@@ -21,7 +21,7 @@ const getProductData = async id => {
     headers: {
       Accept: "application/json",
       "Content-Type": "application/json",
-      Authorization: `Bearer ${process.env.GATSBY_STRIPE_SK}`,
+      Authorization: `Bearer ${process.env.STRIPE_SK}`,
     },
   })
 

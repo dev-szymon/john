@@ -27,9 +27,18 @@ const ProductsPage = ({ data }) => {
       <div className="product-grid">
         {edges.map(({ node }) => {
           const {
-            fields: { prices, name, slug },
+            fields,
             frontmatter: { gallery },
           } = node
+
+          if (!fields) {
+            // if gatsby-node has not created any fields during a call to stripe
+            // it means that the product does not exist in that environment, skip it
+
+            return null
+          }
+
+          const { prices, name, slug } = fields
 
           const {
             metadata: { compareAt },

@@ -1,11 +1,11 @@
 require("dotenv").config()
-const stripe = require("stripe")(process.env.GATSBY_STRIPE_SK)
+const stripe = require("stripe")(process.env.STRIPE_SK)
 const nodemailer = require("nodemailer")
 const Handlebars = require("handlebars")
 const fs = require("fs")
 
 exports.handler = async ({ body, headers }) => {
-  const endpointSecret = process.env.GATSBY_STRIPE_WEBHOOK_SECRET
+  const endpointSecret = process.env.STRIPE_WEBHOOK_SECRET
 
   try {
     const stripeEvent = stripe.webhooks.constructEvent(
