@@ -19,7 +19,7 @@ export class Control extends React.Component {
         headers: {
           Accept: "application/json",
           "Content-Type": "application/json",
-          Authorization: `Bearer ${process.env.STRIPE_SK}`,
+          Authorization: `Bearer ${process.env.GATSBY_STRIPE_SK}`,
         },
       })
         .then(res => res.json())

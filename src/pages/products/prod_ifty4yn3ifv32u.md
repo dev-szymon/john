@@ -1,6 +1,6 @@
 ---
 template: product
-prod_id: prod_J04ThRXe1jxtle
+prod_id: prod_IFty4yN3Ifv32u
 category:
   - wallet
 gallery:

@@ -1,5 +1,5 @@
 require("dotenv").config()
-const stripe = require("stripe")(process.env.STRIPE_SK)
+const stripe = require("stripe")(process.env.GATSBY_STRIPE_SK)
 const nodemailer = require("nodemailer")
 const Handlebars = require("handlebars")
 const fs = require("fs")

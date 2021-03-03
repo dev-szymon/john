@@ -1,4 +1,4 @@
-const stripe = require("stripe")(process.env.STRIPE_SK)
+const stripe = require("stripe")(process.env.GATSBY_STRIPE_SK)
 const { worldwide } = require("../src/utils/shipping_countries_allowed")
 
 exports.handler = async ({ body }) => {

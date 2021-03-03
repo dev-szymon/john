@@ -1,27 +1,13 @@
 .home-section {
   overflow: hidden;
-  background-color: black;
 }
 .hero-section {
   width: 100vw;
-  height: 100vh;
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center right;
-  box-shadow: inset 10vw 35vh 30vw var(--colorBlack),
-    inset 30vw -35vh 25vw var(--colorBlack),
-    inset -20vw -20vh 10vw var(--colorBlack);
-}
-
-@media (max-width: 768px) {
-  .hero-section {
-    background-size: 230%;
-    background-position: 90% 40%;
-  }
+  height: calc(100vh - var(--lengthLg3));
 }
 
 .home-page_typography {
-  color: var(--colorWhite);
+  color: var(--colorBlack);
   position: relative;
   padding: var(--lengthLg3) 0 calc(var(--lengthLg3) * 2) 0;
   margin: 0 auto;

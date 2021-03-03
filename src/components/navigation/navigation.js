@@ -14,14 +14,11 @@ const Navigation = ({ isOpen }) => {
           <Link to="/products">
             <li>{`Products`}</li>
           </Link>
-          <Link to="/">
-            <li>{`About & Contact`}</li>
-          </Link>
         </ul>
       </nav>
-      <div className="social-icons">
+      {/* <div className="social-icons">
         <img src={etsy} alt="etsy"></img>
-      </div>
+      </div> */}
     </div>
   )
 }
