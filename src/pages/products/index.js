@@ -14,7 +14,7 @@ const ProductsPage = ({ data }) => {
   const { edges } = data.allMarkdownRemark
   return (
     <Layout>
-      <SEO title="Page two" />
+      <SEO title="Products" />
       <div className="breadcrumbs">
         <span>...</span>
         <span>/</span>

@@ -3,6 +3,7 @@ import { Link, graphql } from "gatsby"
 import Image from "gatsby-image"
 import Layout from "../components/layout"
 import "./home-page.css"
+import SEO from "../components/seo"
 
 export const HomePageTemplate = ({
   featured_image,
@@ -34,6 +35,7 @@ const HomePage = ({ data }) => {
   } = data.markdownRemark.frontmatter
   return (
     <Layout dark={true}>
+      <SEO title="TheCraftsmanJohn" />
       <HomePageTemplate
         featured_image={featured_image}
         main_text={main_text}
