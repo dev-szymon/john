@@ -31,6 +31,9 @@ exports.handler = async ({ body }) => {
       line_items: line_items,
       mode: "payment",
       billing_address_collection: "required",
+      tax_id_collection: {
+        enabled: true,
+      },
       shipping_address_collection: {
         allowed_countries: worldwide,
       },
